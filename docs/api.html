@@ -1,0 +1,13 @@
+---
+layout: default
+title: Modules
+---
+<h1>Modules</h1>
+
+<ul>
+  {% for module in site.modules %}
+    <li>
+      <h2><a href="{{ module.url }}">{{ module.name }}</a></h2>
+    </li>
+  {% endfor %}
+</ul>

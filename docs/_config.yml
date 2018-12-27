@@ -1,8 +1,15 @@
 collections:
   authors:
     output: true
+  modules:
+    output: true
 
 defaults:
+  - scope:
+      path: ""
+      type: "modules"
+    values:
+      layout: "module"
   - scope:
       path: ""
       type: "authors"
@@ -18,4 +25,4 @@ defaults:
     values:
       layout: "default"
 
-      repository: chiara-paci/microdaemon
+repository: chiara-paci/microdaemon

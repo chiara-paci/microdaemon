@@ -1,0 +1,20 @@
+---
+name: microdaemon.responses
+---
+<h1>microdaemon.responses</h1><div><div class="document">
+<p>Response objects for isambard server.</p>
+<p>All response classes inherit from abstract class AbstractResponse, who
+enforces the interface needed  to <cite>IsambardServer</cite> to respect the
+WSGI protocol.</p>
+<p>The interface requires three properties/attributes:</p>
+<dl class="docutils">
+<dt><em>status</em> (str)</dt>
+<dd>HTTP response status, in the form &quot;num_code msg&quot;.</dd>
+<dt><em>headers</em> (list)</dt>
+<dd>List of tuples (key, value)  of HTTP response headers. Every tuple
+will become the line <cite>key: value</cite> in HTTP response header.</dd>
+<dt><em>body_iterable</em> (iterable)</dt>
+<dd>List of bytes forming the response body.</dd>
+</dl>
+</div>
+</div>

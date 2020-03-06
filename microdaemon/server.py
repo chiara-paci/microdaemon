@@ -202,8 +202,8 @@ class InfoNamespace(socketio.Namespace):
         self.size-=1
         if self.size<0: self.size=0
 
-class IsambardServer(object):
-    """Main Isambard object. 
+class Server(object):
+    """Main object. 
 
     *bus* (channels.Bus)
         Communication bus common to all objects.
@@ -212,8 +212,8 @@ class IsambardServer(object):
     *host* (str)
         Host to bind.
 
-    A  `IsambardServer` object  is  the interface  between user  and
-    other components of Isambard. It  run a WSGI server listening on
+    A  `Server` object  is  the interface  between user  and
+    other components of a Microdaemon. It  run a WSGI server listening on
     host *host* and port *port* (default 7373 on localhost).  The user
     can connect with a  browser to "http://*host*:*port*" and interact
     in this way.
@@ -224,33 +224,15 @@ class IsambardServer(object):
 
     """
 
-    def __init__(self,db,bus,host="localhost",port=7373):
+    def __init__(self,bus,host="localhost",port=7373):
         self.bus=bus
         self.bus["configuration"]=channels.SimpleChannel()
         self.bus["onshow"]=channels.SimpleChannel()
-
-        self.db=db 
 
         self._http_host=host
         self._http_port=port
 
         self.application=pages.log_decorator(pages.exception_decorator(self)(self._application))
-
-        th=threads.WhileTrueThread(target=self._thread_onshow,name="OnShowThread")
-        th.start()
-
-    ### Threads
-
-    def _thread_onshow(self):
-        msg=self.bus["onshow"].read_message(block=True)
-        if msg is None: return
-        log_time=common.utc_now()
-        onshow=msg[0]
-        self.db.onshow.append( (log_time,onshow) )
-        logger_onshow.info("[%s] %s" % (log_time,onshow))
-        if "browser/info" in self.bus:
-            self.bus["browser/info"].send_message("onshow",(log_time,onshow))
-
     ### Application
 
     def _application(self,request):
@@ -280,52 +262,12 @@ class IsambardServer(object):
             if request.path_split[0] == "favicon.ico":
                 obj_path=config.FAVICON
                 return pages.StaticPage(self,obj_path)
+            if request.path_split[0] == "configurator":
+                return pages.ConfiguratorPage(self)
             for req,label,title in [ ("license","gplv3","License"),
                                      ("about","about","About") ]:
                 if request.path_split[0] == req:
                     return pages.TextPage(self,label,title)
-            for target,p_class,collection in [ ("pictures",pages.ObjectListPage,self.db.pictures),
-                                               ("videos",pages.ObjectListPage,self.db.videos),
-                                               ("music",pages.ObjectListPage,self.db.music) ]:
-                if request.path_split[0] == target:
-                    return p_class(self,collection)
-
-            for p,p_class in [ ( "showlist", pages.ShowListPage  ),
-                               ( "configurator", pages.ConfiguratorPage  )]:
-                if request.path_split[0] == p:
-                    return p_class(self)
-            raise pages.Http404NotFound(request)
-
-        if len(request.path_split)==2:
-            if request.path_split[0] not in ["pictures","videos","music"]:
-                raise pages.Http404NotFound(request)
-            object_id=request.path_split[1]
-            for target,p_class,collection in [ ("pictures",pages.PictureObjectPage,self.db.pictures),
-                                               ("videos",pages.VideoObjectPage,self.db.videos),
-                                               ("music",pages.MusicObjectPage,self.db.music) ]:
-                if request.path_split[0]==target:
-                    try:
-                        obj=collection[object_id]
-                    except KeyError as e:
-                        raise pages.Http404NotFound(request)
-                    return p_class(self,obj)
-
-        if len(request.path_split)==3:
-            if request.path_split[0] not in ["pictures","videos","music"]:
-                raise pages.Http404NotFound(request)
-            if request.path_split[2]!="thumbnail.jpeg":
-                raise pages.Http404NotFound(request)
-            object_id=request.path_split[1]
-            for target,p_class,collection in [ ("pictures",pages.ThumbnailPage,self.db.pictures),
-                                               ("videos",pages.ThumbnailPage,self.db.videos),
-                                               ("music",pages.ThumbnailPage,self.db.music) ]:
-                if request.path_split[0]==target:
-                    try:
-                        obj=collection[object_id]
-                    except KeyError as e:
-                        raise pages.Http404NotFound(request)
-                    return p_class(self,obj)
-
         raise pages.Http404NotFound(request)
 
 
@@ -338,10 +280,11 @@ class IsambardServer(object):
         Run a WSGI simple server with `self.wsgi` as main function.
         """
 
-        common.log("Isambard %s Started on http://%s:%d/ with %s" % (config.VERSION,
-                                                                     self._http_host,
-                                                                     self._http_port,
-                                                                     self.db))
+        common.log("%s %s Started on http://%s:%d/ with %s" % (config.SERVER_NAME,
+                                                               config.VERSION,
+                                                               self._http_host,
+                                                               self._http_port,
+                                                               self.db))
 
         socket=eventlet.listen((self._http_host, self._http_port))
 

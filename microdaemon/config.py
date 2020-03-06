@@ -77,7 +77,12 @@ class LogConfig(dict):
                 "filters": [ "error_only" ],
             }
 
-        self["handlers"]= {
+        self["handlers"]= self.get_handlers()
+
+        self["loggers"]=self.get_loggers()
+
+    def get_handlers(self):
+        return {
             "console":           console,
             "console_error":     console_error,
             "socketio.log":      self._log_handler_rot("socketio.log"),
@@ -108,6 +113,8 @@ class _Config(object):
 
     class ConfigurationError(Exception): pass
 
+    LIB_NAME="isambard_lib"
+
     STATIC_REL_PATH = "static"  #: Static path, relative to base url (=script name in wsgi invocation)
     FAVICON="img/logo-isambard.png" #: Favicon, relative to static path
 
@@ -124,16 +131,16 @@ class _Config(object):
     COPY_URL="http://www.gianoziaorientale.org"
 
 
-    def __init__(self):
+    def __init__(self,name="isambard"):
 
         self.BASE_DIR=os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
         self.SERVER_NAME="Isambard" #: Server name
 
         ## daemon
-        self.VAR_DIR=self._base_rel("var","isambard")
-        self.CONFIG_DIR=self._base_rel("etc","isambard")
-        self.CONFIG_FILE=self._config_rel("isambard.conf")
-        self.PID_FILE_NAME="isambard.pid"
+        self.VAR_DIR=self._base_rel("var",name)
+        self.CONFIG_DIR=self._base_rel("etc",name)
+        self.CONFIG_FILE=self._config_rel(name+".conf")
+        self.PID_FILE_NAME=name+".pid"
 
         self.UID=None
         self.GID=None
@@ -154,7 +161,31 @@ class _Config(object):
         self.UMASK= os.umask(0) # a bit odd, but that's
         os.umask(self.UMASK)
 
-        self.default={
+        self.default= self.get_default () 
+        # {
+        #     ## running mode
+        #     "debug": self.DEBUG,
+        #     "daemon": self.DAEMON,
+        #     ## process
+        #     "var": self._base_rel("var"),
+        #     "etc": self._base_rel("etc"),
+        #     "pid_file_name": self.PID_FILE_NAME,
+        #     "user": self.USER,
+        #     "group": self.GROUP,
+        #     "umask": self.UMASK,
+        #     ## wsgi server
+        #     "host": self.HOST,
+        #     "port": self.PORT,
+        #     ## business logic
+        #     "time_zone": self.TZ_LABEL,
+        #     "locale": self.LOCALE,
+        # }
+
+
+        self.configurator=configurator.Configurator(self)
+
+    def get_default(self):
+        return {
             ## running mode
             "debug": self.DEBUG,
             "daemon": self.DAEMON,
@@ -172,8 +203,6 @@ class _Config(object):
             "time_zone": self.TZ_LABEL,
             "locale": self.LOCALE,
         }
-
-        self.configurator=configurator.Configurator(self)
 
 
     def setup_config(self,options):
@@ -268,11 +297,15 @@ class _Config(object):
 
         self.configurator.reset_params()
 
+        return conf
+
+    log_config_class=LogConfig
+
     def setup_log(self):
         os.makedirs(self.LOG_DIR,exist_ok=True)
         logging.basicConfig(level=logging.DEBUG,
                             format="%(asctime)s [%(name)s:%(levelname)s] %(message)s")
-        logging.config.dictConfig(LogConfig(self))
+        logging.config.dictConfig(self.log_config_class(self))
 
     def _base_rel(self,*rel):
         return os.path.join(self.BASE_DIR,*rel)
@@ -344,6 +377,15 @@ class _Config(object):
 
     @property
     def STATIC_DIR(self): return self._share_rel("static")                     #: Static dir
+
+    @property
+    def STAGE_DIR(self): return self._db_rel("stage")                     
+
+    @property
+    def STORAGE_SERIALIZER_CHANNELS(self): return self._db_rel("serializer_channels")
+
+    @property
+    def SEQUENCES_DIR(self): return self._db_rel("sequences")
 
 
 sys.modules[__name__]=_Config()

@@ -1,0 +1,33 @@
+---
+name: microdaemon.channels
+---
+<h1>microdaemon.channels</h1><div><div class="document">
+<p>This module define communication bus, channels and exceptions related to message queues.</p>
+<dl class="docutils">
+<dt>Exceptions:</dt>
+<dd><dl class="first last docutils">
+<dt><em>ChannelDefinitionConflict</em></dt>
+<dd>Raised when a channel is defined more than one time with two different classes.</dd>
+<dt><em>NoReceiverOnChannel</em></dt>
+<dd>Raised when a receiver try to read a message without registration on channel.</dd>
+</dl>
+</dd>
+<dt>Classes:</dt>
+<dd><dl class="first last docutils">
+<dt><em>Bus</em></dt>
+<dd>A dictionary of channels.</dd>
+<dt><em>Channel</em></dt>
+<dd>Abstract class for defining a channel.</dd>
+<dt><em>SimpleChannel</em></dt>
+<dd>A channel with one receiver.</dd>
+<dt><em>BroadcastChannel</em></dt>
+<dd>A channel with multiple receivers.</dd>
+<dt><em>RouterChannel</em></dt>
+<dd>A channel with multiple receivers, where each receiver can read only a subset of messages.</dd>
+<dt><em>SerializerChannel</em></dt>
+<dd>A channel with one receiver, able to requeue objects and serialize it until dismissed*</dd>
+</dl>
+</dd>
+</dl>
+</div>
+</div>

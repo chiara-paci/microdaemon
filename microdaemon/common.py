@@ -137,3 +137,8 @@ def wait(sec):
     ev=threading.Event()
     ev.clear()
     ev.wait(sec)
+
+def serialize(obj):
+    if hasattr(obj,"__serialize__"):
+        return obj.__serialize__()
+    return obj

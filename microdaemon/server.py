@@ -186,21 +186,6 @@ class Request(object):
 
         return n_qs
 
-class InfoNamespace(socketio.Namespace):
-    def __init__(self,server,*args,**kwargs):
-        socketio.Namespace.__init__(self,*args,**kwargs)
-        self._server=server
-        self.size=0
-
-    def on_connect(self,sid, environ):
-        common.log('SIO connect %s' % sid)
-        self.size+=1
-        self.emit("init_onshow",self._server.db.onshow,room=sid)
-
-    def on_disconnect(self,sid):
-        common.log('SIO disconnect %s' % sid)
-        self.size-=1
-        if self.size<0: self.size=0
 
 class Server(object):
     """Main object. 
@@ -223,6 +208,21 @@ class Server(object):
             Communication bus common to all objects.
 
     """
+
+    class InfoNamespace(socketio.Namespace):
+        def __init__(self,server,*args,**kwargs):
+            socketio.Namespace.__init__(self,*args,**kwargs)
+            self._server=server
+            self.size=0
+
+        def on_connect(self,sid, environ):
+            common.log('SIO connect %s' % sid)
+            self.size+=1
+
+        def on_disconnect(self,sid):
+            common.log('SIO disconnect %s' % sid)
+            self.size-=1
+            if self.size<0: self.size=0
 
     def __init__(self,bus,host="localhost",port=7373):
         self.bus=bus
@@ -280,11 +280,10 @@ class Server(object):
         Run a WSGI simple server with `self.wsgi` as main function.
         """
 
-        common.log("%s %s Started on http://%s:%d/ with %s" % (config.SERVER_NAME,
-                                                               config.VERSION,
-                                                               self._http_host,
-                                                               self._http_port,
-                                                               self.db))
+        common.log("%s %s Started on http://%s:%d/ " % (config.SERVER_NAME,
+                                                        config.VERSION,
+                                                        self._http_host,
+                                                        self._http_port))
 
         socket=eventlet.listen((self._http_host, self._http_port))
 
@@ -294,7 +293,7 @@ class Server(object):
 
     def _socketio_decorator(self,wsgi):
         sio=socketio.Server(async_mode="eventlet")
-        namespace=InfoNamespace(self,"/info")
+        namespace=self.InfoNamespace(self,"/info")
         sio.register_namespace(namespace)
         self.bus["browser/info"]=channels.BrowserChannel(namespace=namespace)
         return socketio.Middleware(sio,wsgi)

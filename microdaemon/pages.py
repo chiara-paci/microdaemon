@@ -410,7 +410,7 @@ class HomePage(TemplatePage):
 
     def get_context(self,request):
         context=TemplatePage.get_context(self,request)
-        context["onshow"]=self._server.db.onshow
+        #context["onshow"]=self._server.db.onshow
         return context
 
 class ConfiguratorPage(TemplatePage):

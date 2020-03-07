@@ -60,6 +60,12 @@ class LogConfig(dict):
             }
         }
 
+
+        self["handlers"]= self.get_handlers()
+
+        self["loggers"]=self.get_loggers()
+
+    def get_handlers(self):
         if self._config.DAEMON:
             console=self._log_handler_rot("console.log",formatter="with_logger")
             console_error=self._log_handler_rot("errors.log",formatter="with_logger")
@@ -76,12 +82,6 @@ class LogConfig(dict):
                 "stream": "ext://sys.stdout",
                 "filters": [ "error_only" ],
             }
-
-        self["handlers"]= self.get_handlers()
-
-        self["loggers"]=self.get_loggers()
-
-    def get_handlers(self):
         return {
             "console":           console,
             "console_error":     console_error,
@@ -101,6 +101,9 @@ class LogConfig(dict):
             self._config.LIB_NAME+".server.onshow":    self._log_logger("onshow.log"),
             self._config.LIB_NAME+".pages.access":    self._log_logger("pages_access.log"),
             self._config.LIB_NAME+".pages.error":     self._log_logger("pages_error.log"),
+            "microdaemon.server.onshow":    self._log_logger("onshow.log"),
+            "microdaemon.pages.access":    self._log_logger("pages_access.log"),
+            "microdaemon.pages.error":     self._log_logger("pages_error.log"),
             "root":                           self._log_logger("console","common.log"),
             "": {
                 "level": "ERROR",
@@ -109,7 +112,7 @@ class LogConfig(dict):
             },
         }
 
-class _Config(object):
+class Config(object):
 
     class ConfigurationError(Exception): pass
 
@@ -130,17 +133,23 @@ class _Config(object):
     COPY_NAME="Gianozia Orientale"
     COPY_URL="http://www.gianoziaorientale.org"
 
+    @classmethod
+    def install(cls,*args,**kwargs):
+        sys.modules["microdaemon.config"]=cls(*args,**kwargs)
 
-    def __init__(self,name="isambard"):
-
-        self.BASE_DIR=os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-        self.SERVER_NAME="Isambard" #: Server name
+    def __init__(self,name="isambard",base_dir=None,server_name="Isambard"):
+        if base_dir is None:
+            self.BASE_DIR=os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        else:
+            self.BASE_DIR=base_dir
+        self.SERVER_NAME=server_name #: Server name
+        self._name=name
 
         ## daemon
-        self.VAR_DIR=self._base_rel("var",name)
-        self.CONFIG_DIR=self._base_rel("etc",name)
-        self.CONFIG_FILE=self._config_rel(name+".conf")
-        self.PID_FILE_NAME=name+".pid"
+        self.VAR_DIR=self._base_rel("var",self._name)
+        self.CONFIG_DIR=self._base_rel("etc",self._name)
+        self.CONFIG_FILE=self._config_rel(self._name+".conf")
+        self.PID_FILE_NAME=self._name+".pid"
 
         self.UID=None
         self.GID=None
@@ -148,7 +157,7 @@ class _Config(object):
 
         ## wsgi server
         self.HOST="localhost"
-        self.PORT=8001
+        self.PORT=7373
         
         ## business logic
         self.TZ_LABEL="Europe/Rome"      #: Timezone name
@@ -320,7 +329,7 @@ class _Config(object):
         return os.path.join(self.CONFIG_DIR,*rel)
 
     def _share_rel(self,*rel):
-        return os.path.join(self.BASE_DIR,"share","isambard",*rel)
+        return os.path.join(self.BASE_DIR,"share",self._name,*rel)
 
     @property
     def COPY_YEAR(self):
@@ -388,4 +397,3 @@ class _Config(object):
     def SEQUENCES_DIR(self): return self._db_rel("sequences")
 
 
-sys.modules[__name__]=_Config()

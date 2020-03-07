@@ -5,6 +5,29 @@ import os.path
 
 from . import common,config,jsonlib
 
+class ListProxy(collections.abc.MutableSequence,abc.ABC):
+    """Abstract for masquerading an list. 
+
+    A  DictProxy has  list  standard behaviour,  with just  few
+    details changed.
+
+    """
+
+    def __init__(self):
+        collections.abc.MutableSequence.__init__(self)
+        self._list=[]
+
+    def __str__(self): return self._list.__str__()
+    def __repr__(self): return self._list.__repr__()
+    def __getitem__(self,*args,**kwargs):  return self._list.__getitem__(*args,**kwargs)
+    def __delitem__(self,*args,**kwargs):  return self._list.__delitem__(*args,**kwargs)
+    def __setitem__(self,*args,**kwargs): self._list.__setitem__(*args,**kwargs)
+    def __len__(self,*args,**kwargs): return self._list.__len__(*args,**kwargs)
+    def insert(self,*args,**kwargs): return self._list.insert(*args,**kwargs)
+    def __iter__(self,*args,**kwargs): return self._list.__iter__(*args,**kwargs)
+    def __contains__(self,*args,**kwargs):  return self._list.__contains__(*args,**kwargs)
+    def __reversed__(self,*args,**kwargs): return self._list.__reversed__(*args,**kwargs)
+
 class DictProxy(collections.abc.MutableMapping,abc.ABC):
     """Abstract for masquerading an OrderedDict. 
 
@@ -14,7 +37,7 @@ class DictProxy(collections.abc.MutableMapping,abc.ABC):
     """
 
     def __init__(self):
-        collections.abc.MutableSequence.__init__(self)
+        collections.abc.MutableMapping.__init__(self)
         self._dict=collections.OrderedDict()
 
     def __str__(self): return self._dict.__str__()

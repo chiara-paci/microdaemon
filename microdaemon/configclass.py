@@ -94,8 +94,7 @@ class LogConfig(dict):
             
         }
 
-    def get_loggers(self):
-        return {
+        self["loggers"]={
             "socketio":                       self._log_logger("socketio.log",level="INFO"),
             "engineio":                       self._log_logger("socketio.log",level="INFO"),
             self._config.LIB_NAME+".server.onshow":    self._log_logger("onshow.log"),
@@ -112,7 +111,8 @@ class LogConfig(dict):
             },
         }
 
-class Config(object):
+
+class _Config(object):
 
     class ConfigurationError(Exception): pass
 

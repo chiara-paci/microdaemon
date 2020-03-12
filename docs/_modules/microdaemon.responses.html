@@ -1,7 +1,9 @@
 ---
 name: microdaemon.responses
 ---
-<h1>microdaemon.responses</h1><div><div class="document">
+<h1 class='title'>microdaemon.responses</h1>
+<section>
+<div class="document">
 <p>Response objects for isambard server.</p>
 <p>All response classes inherit from abstract class AbstractResponse, who
 enforces the interface needed  to <cite>IsambardServer</cite> to respect the
@@ -17,4 +19,236 @@ will become the line <cite>key: value</cite> in HTTP response header.</dd>
 <dd>List of bytes forming the response body.</dd>
 </dl>
 </div>
+</section>
+<section>
+<h1>Classes</h1>
+<section>
+<h2 class='title'>Cookie(self, name, value)</h2>
+<section>
+<div class="document">
 </div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: object</p><ul></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__eq__(self, other)</h3>
+<section>
+<div class="document">
+<p>Return self==value.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__hash__(self)</h3>
+<section>
+<div class="document">
+<p>Return hash(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__ne__(self, other)</h3>
+<section>
+<div class="document">
+<p>Return self!=value.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__repr__(self)</h3>
+<section>
+<div class="document">
+<p>Return repr(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>AbstractResponse(self, content_type, status='200 OK', cookies=[])</h2>
+<section>
+<div class="document">
+<p>Abstract class.</p>
+<dl class="docutils">
+<dt><em>content_type</em></dt>
+<dd>Mime type of the response.</dd>
+<dt><em>status</em></dt>
+<dd>HTTP response status, in the form &quot;num_code msg&quot;.</dd>
+</dl>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: abc.ABC</p><ul><li>abc.ABC</li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>add_cookie(self, cookie)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Response(self, body, content_type='text/html; charset=utf-8', status='200 OK', cookies=[])</h2>
+<section>
+<div class="document">
+<p>Generic response with a body (a &quot;normal&quot; response).</p>
+<dl class="docutils">
+<dt><em>body</em> (str/bytes)</dt>
+<dd>Response body.</dd>
+<dt><em>content_type</em> (str)</dt>
+<dd>Mime type of the response.</dd>
+<dt><em>status</em> (str)</dt>
+<dd>HTTP response status, in the form &quot;num_code msg&quot;.</dd>
+</dl>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.responses.AbstractResponse</p><ul><li>microdaemon.responses.AbstractResponse<ul><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>add_cookie(self, cookie)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>JsonResponse(self, jobj, content_type='application/json', status='200 OK', cookies=[])</h2>
+<section>
+<div class="document">
+<p>Response for json object to serialize.</p>
+<dl class="docutils">
+<dt><em>jobj</em> (object)</dt>
+<dd>A json serializable object.</dd>
+<dt><em>content_type</em> (str)</dt>
+<dd>Mime type of the response.</dd>
+<dt><em>status</em> (str)</dt>
+<dd>HTTP response status, in the form &quot;num_code msg&quot;.</dd>
+</dl>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.responses.Response</p><ul><li>microdaemon.responses.Response<ul><li>microdaemon.responses.AbstractResponse<ul><li>abc.ABC</li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>add_cookie(self, cookie)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>RedirectResponse(self, url, content_type='text/html; charset=utf-8', cookies=[])</h2>
+<section>
+<div class="document">
+<p>Response for redirect.</p>
+<dl class="docutils">
+<dt><em>url</em></dt>
+<dd>The url to redirect.</dd>
+<dt><em>content_type</em> (str)</dt>
+<dd>Mime type of the response.</dd>
+</dl>
+<p>This response  has status &quot;303 See  other&quot;. New url is  written in
+the header field &quot;Location&quot; and body is empty.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.responses.AbstractResponse</p><ul><li>microdaemon.responses.AbstractResponse<ul><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>add_cookie(self, cookie)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>FoundResponse(self, wait_time, content_type='text/html; charset=utf-8', cookies=[])</h2>
+<section>
+<div class="document">
+<p>Response for data not ready yet.</p>
+<dl class="docutils">
+<dt><em>wait_time</em></dt>
+<dd>The time in seconds a client should wait before retry.</dd>
+<dt><em>content_type</em> (str)</dt>
+<dd>Mime type of the response.</dd>
+</dl>
+<p>This response  has status &quot;302 Found&quot;.  Wait time is written  in the
+header field &quot;Retry-After&quot; and body is empty.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.responses.AbstractResponse</p><ul><li>microdaemon.responses.AbstractResponse<ul><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>add_cookie(self, cookie)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>StaticResponse(self, file_path, cookies=[])</h2>
+<section>
+<div class="document">
+<p>Response for serving static content (i.e. content from file system).</p>
+<dl class="docutils">
+<dt><em>path</em></dt>
+<dd>The full path of file to serve.</dd>
+</dl>
+<p>Mime type is inferred.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.responses.AbstractResponse</p><ul><li>microdaemon.responses.AbstractResponse<ul><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>add_cookie(self, cookie)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+</section>

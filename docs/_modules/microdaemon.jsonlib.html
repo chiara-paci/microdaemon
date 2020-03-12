@@ -1,6 +1,112 @@
 ---
 name: microdaemon.jsonlib
 ---
-<h1>microdaemon.jsonlib</h1><div><div class="document">
+<h1 class='title'>microdaemon.jsonlib</h1>
+<section>
+<div class="document">
 </div>
+</section>
+<section>
+<h1>Functions</h1>
+<section>
+<h2 class='title'>json_object_pairs_hook(obj)</h2>
+<section>
+<div class="document">
 </div>
+</section>
+</section>
+<section>
+<h2 class='title'>json_fd_load(fd, comment='//')</h2>
+<section>
+<div class="document">
+<p>Load a json file by file object. Skip any line beginning with <em>comment</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">fd:</th><td class="field-body">file object</td>
+</tr>
+<tr class="field"><th class="field-name">comment:</th><td class="field-body">first characters of comment lines</td>
+</tr>
+<tr class="field"><th class="field-name">returns:</th><td class="field-body">python object</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section>
+<h2 class='title'>json_load(fpath, comment='//')</h2>
+<section>
+<div class="document">
+<p>Load a json file by file path. Skip any line beginning with <em>comment</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">fpath:</th><td class="field-body">file path</td>
+</tr>
+<tr class="field"><th class="field-name">comment:</th><td class="field-body">first characters of comment lines</td>
+</tr>
+<tr class="field"><th class="field-name">returns:</th><td class="field-body">python object</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section>
+<h2 class='title'>serialize_time(obj)</h2>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h2 class='title'>serialize_numpy(obj)</h2>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h2 class='title'>serialize_pandas(obj)</h2>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h2 class='title'>json_settings()</h2>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+<section>
+<h1>Classes</h1>
+<section>
+<h2 class='title'>JsonSerializerError(self, original, obj)</h2>
+<section>
+<div class="document">
+<p>Common base class for all non-exit exceptions.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: Exception</p><ul><li>Exception<ul><li>BaseException</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+</section>

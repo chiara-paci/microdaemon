@@ -1,10 +1,1347 @@
 ---
 name: microdaemon.pages
 ---
-<h1>microdaemon.pages</h1><div><div class="document">
+<h1 class='title'>microdaemon.pages</h1>
+<section>
+<div class="document">
 <p>Pages for isambard server.</p>
 <p>A page is the abstraction of something returned to user.</p>
 <p>The    server   build    a   page,    therefore   call    the   method
 <cite>page.dispatch(request)</cite> to obtain a response.</p>
 </div>
+</section>
+<section>
+<h1>Functions</h1>
+<section>
+<h2 class='title'>log_decorator(func)</h2>
+<section>
+<div class="document">
 </div>
+</section>
+</section>
+<section>
+<h2 class='title'>exception_decorator(server)</h2>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+<section>
+<h1>Classes</h1>
+<section>
+<h2 class='title'>Http405MethodNotAllowed(self, request)</h2>
+<section>
+<div class="document">
+<p>Raised for request with invalid method.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: Exception</p><ul><li>Exception<ul><li>BaseException</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Http404NotFound(self, request)</h2>
+<section>
+<div class="document">
+<p>Raised for request for inexistent resource.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: Exception</p><ul><li>Exception<ul><li>BaseException</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Http400BadRequest(self, request)</h2>
+<section>
+<div class="document">
+<p>Raised for bad request.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: Exception</p><ul><li>Exception<ul><li>BaseException</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Http401Unauthorized(self, request)</h2>
+<section>
+<div class="document">
+<p>Raised for unauthorized.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: Exception</p><ul><li>Exception<ul><li>BaseException</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Http403Forbidden(self, request)</h2>
+<section>
+<div class="document">
+<p>Raised for forbidden.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: Exception</p><ul><li>Exception<ul><li>BaseException</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Page(self, server)</h2>
+<section>
+<div class="document">
+<p>Abstract class.</p>
+<dl class="docutils">
+<dt><em>server</em> (server.IsambardServer)</dt>
+<dd>The server.</dd>
+</dl>
+<p>Page provides a method <cite>dispatch</cite>  for all subclasses and requests
+that all subclasses implement a <cite>get_handler</cite> method.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: abc.ABC</p><ul><li>abc.ABC</li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>dispatch(self, request)</h3>
+<section>
+<div class="document">
+<p>Build the response for the request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>The client request.</dd>
+</dl>
+<p>Return the response (responses.Response) or raise appropriate exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_handler(self, request)</h3>
+<section>
+<div class="document">
+<p>Return the callable that can handle this request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>A request object</dd>
+</dl>
+<p>Return a callable with  signature response=f(request) or raise
+a Http405MethodNotAllowed(request) exception if the request is
+invalid.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>StaticPage(self, server, obj_path)</h2>
+<section>
+<div class="document">
+<p>Page for static resource.</p>
+<dl class="docutils">
+<dt><em>server</em> (server.IsambardServer)</dt>
+<dd>The server.</dd>
+<dt><em>obj_path</em> (str)</dt>
+<dd>The path of static resource, relative to <cite>config.STATIC_DIR</cite>.</dd>
+</dl>
+<p>HTTP  method  accepted:</p>
+<blockquote>
+GET, served  by <cite>self.get()</cite>.</blockquote>
+<p>Response:</p>
+<blockquote>
+<cite>responses.StaticResponse</cite>.</blockquote>
+<p>Exception:</p>
+<blockquote>
+<dl class="docutils">
+<dt><cite>Http405MethodNotAllowed</cite></dt>
+<dd>if the http method is not <em>GET</em>;</dd>
+<dt><cite>Http404NotFound</cite></dt>
+<dd>if the resource requested is not available.</dd>
+</dl>
+</blockquote>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.pages.Page</p><ul><li>microdaemon.pages.Page<ul><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_get_path(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>dispatch(self, request)</h3>
+<section>
+<div class="document">
+<p>Build the response for the request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>The client request.</dd>
+</dl>
+<p>Return the response (responses.Response) or raise appropriate exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get(self, request)</h3>
+<section>
+<div class="document">
+<p>Handler for GET.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_handler(self, request)</h3>
+<section>
+<div class="document">
+<p>Return the callable that can handle this request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>A request object</dd>
+</dl>
+<p>Return a callable with  signature response=f(request) or raise
+a Http405MethodNotAllowed(request) exception if the request is
+invalid.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>ThumbnailPage(self, server, media_object)</h2>
+<section>
+<div class="document">
+<p>Page for static resource.</p>
+<dl class="docutils">
+<dt><em>server</em> (server.IsambardServer)</dt>
+<dd>The server.</dd>
+<dt><em>obj_path</em> (str)</dt>
+<dd>The path of static resource, relative to <cite>config.STATIC_DIR</cite>.</dd>
+</dl>
+<p>HTTP  method  accepted:</p>
+<blockquote>
+GET, served  by <cite>self.get()</cite>.</blockquote>
+<p>Response:</p>
+<blockquote>
+<cite>responses.StaticResponse</cite>.</blockquote>
+<p>Exception:</p>
+<blockquote>
+<dl class="docutils">
+<dt><cite>Http405MethodNotAllowed</cite></dt>
+<dd>if the http method is not <em>GET</em>;</dd>
+<dt><cite>Http404NotFound</cite></dt>
+<dd>if the resource requested is not available.</dd>
+</dl>
+</blockquote>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.pages.StaticPage</p><ul><li>microdaemon.pages.StaticPage<ul><li>microdaemon.pages.Page<ul><li>abc.ABC</li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_get_path(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>dispatch(self, request)</h3>
+<section>
+<div class="document">
+<p>Build the response for the request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>The client request.</dd>
+</dl>
+<p>Return the response (responses.Response) or raise appropriate exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get(self, request)</h3>
+<section>
+<div class="document">
+<p>Handler for GET.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_handler(self, request)</h3>
+<section>
+<div class="document">
+<p>Return the callable that can handle this request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>A request object</dd>
+</dl>
+<p>Return a callable with  signature response=f(request) or raise
+a Http405MethodNotAllowed(request) exception if the request is
+invalid.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>TemplatePage(self, server)</h2>
+<section>
+<div class="document">
+<p>Generate a page with a jinja2 template.</p>
+<p>HTTP  method  accepted:</p>
+<blockquote>
+GET, served  by <cite>self.get()</cite>.</blockquote>
+<p>Response:</p>
+<blockquote>
+<cite>responses.Response</cite>.</blockquote>
+<p>Exception:</p>
+<blockquote>
+<dl class="docutils">
+<dt><cite>Http405MethodNotAllowed</cite></dt>
+<dd>if the http method is not <em>GET</em>;</dd>
+</dl>
+</blockquote>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.pages.Page</p><ul><li>microdaemon.pages.Page<ul><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_apply_template(self, template_name, context)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>dispatch(self, request)</h3>
+<section>
+<div class="document">
+<p>Build the response for the request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>The client request.</dd>
+</dl>
+<p>Return the response (responses.Response) or raise appropriate exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get(self, request)</h3>
+<section>
+<div class="document">
+<p>Handler for GET.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_context(self, request)</h3>
+<section>
+<div class="document">
+<p>Generate the context for the template.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_handler(self, request)</h3>
+<section>
+<div class="document">
+<p>Return the callable that can handle this request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>A request object</dd>
+</dl>
+<p>Return a callable with  signature response=f(request) or raise
+a Http405MethodNotAllowed(request) exception if the request is
+invalid.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>TextPage(self, server, label, title)</h2>
+<section>
+<div class="document">
+<p>Generate a page with a jinja2 template.</p>
+<p>HTTP  method  accepted:</p>
+<blockquote>
+GET, served  by <cite>self.get()</cite>.</blockquote>
+<p>Response:</p>
+<blockquote>
+<cite>responses.Response</cite>.</blockquote>
+<p>Exception:</p>
+<blockquote>
+<dl class="docutils">
+<dt><cite>Http405MethodNotAllowed</cite></dt>
+<dd>if the http method is not <em>GET</em>;</dd>
+</dl>
+</blockquote>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.pages.TemplatePage</p><ul><li>microdaemon.pages.TemplatePage<ul><li>microdaemon.pages.Page<ul><li>abc.ABC</li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_apply_template(self, template_name, context)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>dispatch(self, request)</h3>
+<section>
+<div class="document">
+<p>Build the response for the request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>The client request.</dd>
+</dl>
+<p>Return the response (responses.Response) or raise appropriate exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get(self, request)</h3>
+<section>
+<div class="document">
+<p>Handler for GET.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_context(self, request)</h3>
+<section>
+<div class="document">
+<p>Generate the context for the template.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_handler(self, request)</h3>
+<section>
+<div class="document">
+<p>Return the callable that can handle this request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>A request object</dd>
+</dl>
+<p>Return a callable with  signature response=f(request) or raise
+a Http405MethodNotAllowed(request) exception if the request is
+invalid.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>ErrorPage(self, server, exception)</h2>
+<section>
+<div class="document">
+<p>Generate an error page.</p>
+<p>HTTP  method  accepted:</p>
+<blockquote>
+all, served  by <cite>self.get()</cite>.</blockquote>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.pages.TemplatePage</p><ul><li>microdaemon.pages.TemplatePage<ul><li>microdaemon.pages.Page<ul><li>abc.ABC</li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_apply_template(self, template_name, context)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>dispatch(self, request)</h3>
+<section>
+<div class="document">
+<p>Build the response for the request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>The client request.</dd>
+</dl>
+<p>Return the response (responses.Response) or raise appropriate exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get(self, request)</h3>
+<section>
+<div class="document">
+<p>Handler for GET.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_context(self, request)</h3>
+<section>
+<div class="document">
+<p>Generate the context for the template.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_handler(self, request)</h3>
+<section>
+<div class="document">
+<p>Return the callable that can handle this request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>A request object</dd>
+</dl>
+<p>Return a callable with  signature response=f(request) or raise
+a Http405MethodNotAllowed(request) exception if the request is
+invalid.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Error404Page(self, server, exception)</h2>
+<section>
+<div class="document">
+<p>Generate an error 404 page.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.pages.ErrorPage</p><ul><li>microdaemon.pages.ErrorPage<ul><li>microdaemon.pages.TemplatePage<ul><li>microdaemon.pages.Page<ul><li>abc.ABC</li></ul></li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_apply_template(self, template_name, context)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>dispatch(self, request)</h3>
+<section>
+<div class="document">
+<p>Build the response for the request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>The client request.</dd>
+</dl>
+<p>Return the response (responses.Response) or raise appropriate exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get(self, request)</h3>
+<section>
+<div class="document">
+<p>Handler for GET.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_context(self, request)</h3>
+<section>
+<div class="document">
+<p>Generate the context for the template.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_handler(self, request)</h3>
+<section>
+<div class="document">
+<p>Return the callable that can handle this request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>A request object</dd>
+</dl>
+<p>Return a callable with  signature response=f(request) or raise
+a Http405MethodNotAllowed(request) exception if the request is
+invalid.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Error400Page(self, server, exception)</h2>
+<section>
+<div class="document">
+<p>Generate an error 400 page.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.pages.ErrorPage</p><ul><li>microdaemon.pages.ErrorPage<ul><li>microdaemon.pages.TemplatePage<ul><li>microdaemon.pages.Page<ul><li>abc.ABC</li></ul></li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_apply_template(self, template_name, context)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>dispatch(self, request)</h3>
+<section>
+<div class="document">
+<p>Build the response for the request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>The client request.</dd>
+</dl>
+<p>Return the response (responses.Response) or raise appropriate exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get(self, request)</h3>
+<section>
+<div class="document">
+<p>Handler for GET.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_context(self, request)</h3>
+<section>
+<div class="document">
+<p>Generate the context for the template.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_handler(self, request)</h3>
+<section>
+<div class="document">
+<p>Return the callable that can handle this request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>A request object</dd>
+</dl>
+<p>Return a callable with  signature response=f(request) or raise
+a Http405MethodNotAllowed(request) exception if the request is
+invalid.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Error401Page(self, server, exception)</h2>
+<section>
+<div class="document">
+<p>Generate an error 401 page.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.pages.ErrorPage</p><ul><li>microdaemon.pages.ErrorPage<ul><li>microdaemon.pages.TemplatePage<ul><li>microdaemon.pages.Page<ul><li>abc.ABC</li></ul></li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_apply_template(self, template_name, context)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>dispatch(self, request)</h3>
+<section>
+<div class="document">
+<p>Build the response for the request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>The client request.</dd>
+</dl>
+<p>Return the response (responses.Response) or raise appropriate exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get(self, request)</h3>
+<section>
+<div class="document">
+<p>Handler for GET.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_context(self, request)</h3>
+<section>
+<div class="document">
+<p>Generate the context for the template.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_handler(self, request)</h3>
+<section>
+<div class="document">
+<p>Return the callable that can handle this request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>A request object</dd>
+</dl>
+<p>Return a callable with  signature response=f(request) or raise
+a Http405MethodNotAllowed(request) exception if the request is
+invalid.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Error403Page(self, server, exception)</h2>
+<section>
+<div class="document">
+<p>Generate an error 403 page.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.pages.ErrorPage</p><ul><li>microdaemon.pages.ErrorPage<ul><li>microdaemon.pages.TemplatePage<ul><li>microdaemon.pages.Page<ul><li>abc.ABC</li></ul></li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_apply_template(self, template_name, context)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>dispatch(self, request)</h3>
+<section>
+<div class="document">
+<p>Build the response for the request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>The client request.</dd>
+</dl>
+<p>Return the response (responses.Response) or raise appropriate exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get(self, request)</h3>
+<section>
+<div class="document">
+<p>Handler for GET.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_context(self, request)</h3>
+<section>
+<div class="document">
+<p>Generate the context for the template.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_handler(self, request)</h3>
+<section>
+<div class="document">
+<p>Return the callable that can handle this request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>A request object</dd>
+</dl>
+<p>Return a callable with  signature response=f(request) or raise
+a Http405MethodNotAllowed(request) exception if the request is
+invalid.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Error405Page(self, server, exception)</h2>
+<section>
+<div class="document">
+<p>Generate an error 405 page.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.pages.ErrorPage</p><ul><li>microdaemon.pages.ErrorPage<ul><li>microdaemon.pages.TemplatePage<ul><li>microdaemon.pages.Page<ul><li>abc.ABC</li></ul></li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_apply_template(self, template_name, context)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>dispatch(self, request)</h3>
+<section>
+<div class="document">
+<p>Build the response for the request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>The client request.</dd>
+</dl>
+<p>Return the response (responses.Response) or raise appropriate exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get(self, request)</h3>
+<section>
+<div class="document">
+<p>Handler for GET.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_context(self, request)</h3>
+<section>
+<div class="document">
+<p>Generate the context for the template.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_handler(self, request)</h3>
+<section>
+<div class="document">
+<p>Return the callable that can handle this request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>A request object</dd>
+</dl>
+<p>Return a callable with  signature response=f(request) or raise
+a Http405MethodNotAllowed(request) exception if the request is
+invalid.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Error500Page(self, server, exception)</h2>
+<section>
+<div class="document">
+<p>Generate an error 500 page.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.pages.ErrorPage</p><ul><li>microdaemon.pages.ErrorPage<ul><li>microdaemon.pages.TemplatePage<ul><li>microdaemon.pages.Page<ul><li>abc.ABC</li></ul></li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_apply_template(self, template_name, context)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>dispatch(self, request)</h3>
+<section>
+<div class="document">
+<p>Build the response for the request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>The client request.</dd>
+</dl>
+<p>Return the response (responses.Response) or raise appropriate exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get(self, request)</h3>
+<section>
+<div class="document">
+<p>Handler for GET.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_context(self, request)</h3>
+<section>
+<div class="document">
+<p>Generate the context for the template.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_handler(self, request)</h3>
+<section>
+<div class="document">
+<p>Return the callable that can handle this request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>A request object</dd>
+</dl>
+<p>Return a callable with  signature response=f(request) or raise
+a Http405MethodNotAllowed(request) exception if the request is
+invalid.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>HomePage(self, server)</h2>
+<section>
+<div class="document">
+<p>Generate the home page.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.pages.TemplatePage</p><ul><li>microdaemon.pages.TemplatePage<ul><li>microdaemon.pages.Page<ul><li>abc.ABC</li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_apply_template(self, template_name, context)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>dispatch(self, request)</h3>
+<section>
+<div class="document">
+<p>Build the response for the request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>The client request.</dd>
+</dl>
+<p>Return the response (responses.Response) or raise appropriate exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get(self, request)</h3>
+<section>
+<div class="document">
+<p>Handler for GET.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_context(self, request)</h3>
+<section>
+<div class="document">
+<p>Generate the context for the template.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_handler(self, request)</h3>
+<section>
+<div class="document">
+<p>Return the callable that can handle this request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>A request object</dd>
+</dl>
+<p>Return a callable with  signature response=f(request) or raise
+a Http405MethodNotAllowed(request) exception if the request is
+invalid.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>ConfiguratorPage(self, server)</h2>
+<section>
+<div class="document">
+<p>Generate the configurator page.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.pages.TemplatePage</p><ul><li>microdaemon.pages.TemplatePage<ul><li>microdaemon.pages.Page<ul><li>abc.ABC</li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_apply_template(self, template_name, context)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>dispatch(self, request)</h3>
+<section>
+<div class="document">
+<p>Build the response for the request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>The client request.</dd>
+</dl>
+<p>Return the response (responses.Response) or raise appropriate exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get(self, request)</h3>
+<section>
+<div class="document">
+<p>Handler for GET.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_context(self, request)</h3>
+<section>
+<div class="document">
+<p>Generate the context for the template.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_handler(self, request)</h3>
+<section>
+<div class="document">
+<p>Return the callable that can handle this request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>A request object</dd>
+</dl>
+<p>Return a callable with  signature response=f(request) or raise
+a Http405MethodNotAllowed(request) exception if the request is
+invalid.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>ObjectListPage(self, server, collection)</h2>
+<section>
+<div class="document">
+<p>Generate the home page.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.pages.TemplatePage</p><ul><li>microdaemon.pages.TemplatePage<ul><li>microdaemon.pages.Page<ul><li>abc.ABC</li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_apply_template(self, template_name, context)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>dispatch(self, request)</h3>
+<section>
+<div class="document">
+<p>Build the response for the request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>The client request.</dd>
+</dl>
+<p>Return the response (responses.Response) or raise appropriate exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get(self, request)</h3>
+<section>
+<div class="document">
+<p>Handler for GET.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_context(self, request)</h3>
+<section>
+<div class="document">
+<p>Generate the context for the template.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_handler(self, request)</h3>
+<section>
+<div class="document">
+<p>Return the callable that can handle this request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>A request object</dd>
+</dl>
+<p>Return a callable with  signature response=f(request) or raise
+a Http405MethodNotAllowed(request) exception if the request is
+invalid.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>JsonDataPage(self, server)</h2>
+<section>
+<div class="document">
+<p>Abstract class for output related json data pages.</p>
+<dl class="docutils">
+<dt><em>server</em> (server.IsambardServer)</dt>
+<dd>The server.</dd>
+</dl>
+<p>HTTP  method  accepted:</p>
+<blockquote>
+GET with accept=&quot;application/json&quot;, served  by <cite>self.get_json()</cite>.</blockquote>
+<p>Response:</p>
+<blockquote>
+<dl class="docutils">
+<dt><cite>responses.JsonResponse</cite></dt>
+<dd>when data are available;</dd>
+<dt><cite>responses.FoundResponse</cite></dt>
+<dd>when data are loading.</dd>
+</dl>
+</blockquote>
+<p>Exception:</p>
+<blockquote>
+<dl class="docutils">
+<dt><cite>Http405MethodNotAllowed</cite></dt>
+<dd>if the http method is not <em>GET</em> or accept is not &quot;application/json&quot;;</dd>
+<dt><cite>Http404NotFound</cite></dt>
+<dd>if requested data cannot be retrieved.</dd>
+</dl>
+</blockquote>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.pages.Page, abc.ABC</p><ul><li>microdaemon.pages.Page<ul><li>abc.ABC</li></ul></li><li>abc.ABC</li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>data(self, request)</h3>
+<section>
+<div class="document">
+<p>Generate data to return to the user.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>The client request.</dd>
+</dl>
+<p>Return a python object to serialize.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>dispatch(self, request)</h3>
+<section>
+<div class="document">
+<p>Build the response for the request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>The client request.</dd>
+</dl>
+<p>Return the response (responses.Response) or raise appropriate exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_handler(self, request)</h3>
+<section>
+<div class="document">
+<p>Return the callable that can handle this request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>A request object</dd>
+</dl>
+<p>Return a callable with  signature response=f(request) or raise
+a Http405MethodNotAllowed(request) exception if the request is
+invalid.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_json(self, request)</h3>
+<section>
+<div class="document">
+<p>Handle a GET request with accept=&quot;application/json&quot;.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>ActionPage(self, server)</h2>
+<section>
+<div class="document">
+<p>Abstract class for pages requesting an action.</p>
+<dl class="docutils">
+<dt><em>server</em> (server.IsambardServer)</dt>
+<dd>The server.</dd>
+</dl>
+<p>An  ActionPage  implements  the PRG  (post/redirect/get)  pattern:
+after doing an  action, it returns a  <cite>RedirectResponse</cite>. The only
+method accepted is POST.</p>
+<p>HTTP  method  accepted:</p>
+<blockquote>
+POST, served  by <cite>self.post()</cite>.</blockquote>
+<p>Response:</p>
+<blockquote>
+<cite>responses.RedirectResponse</cite>.</blockquote>
+<p>Exception:</p>
+<blockquote>
+<dl class="docutils">
+<dt><cite>Http405MethodNotAllowed</cite></dt>
+<dd>if the http method is not <em>POST</em>.</dd>
+</dl>
+</blockquote>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.pages.Page, abc.ABC</p><ul><li>microdaemon.pages.Page<ul><li>abc.ABC</li></ul></li><li>abc.ABC</li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>action(self, request)</h3>
+<section>
+<div class="document">
+<p>Perform action requested by the user.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>The client request.</dd>
+</dl>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>dispatch(self, request)</h3>
+<section>
+<div class="document">
+<p>Build the response for the request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>The client request.</dd>
+</dl>
+<p>Return the response (responses.Response) or raise appropriate exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_handler(self, request)</h3>
+<section>
+<div class="document">
+<p>Return the callable that can handle this request.</p>
+<dl class="docutils">
+<dt><em>request</em> (server.Request)</dt>
+<dd>A request object</dd>
+</dl>
+<p>Return a callable with  signature response=f(request) or raise
+a Http405MethodNotAllowed(request) exception if the request is
+invalid.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>post(self, request)</h3>
+<section>
+<div class="document">
+<p>Handle a POST request.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+</section>

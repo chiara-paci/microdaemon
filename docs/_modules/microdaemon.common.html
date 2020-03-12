@@ -1,6 +1,218 @@
 ---
 name: microdaemon.common
 ---
-<h1>microdaemon.common</h1><div><div class="document">
+<h1 class='title'>microdaemon.common</h1>
+<section>
+<div class="document">
 </div>
+</section>
+<section>
+<h1>Functions</h1>
+<section>
+<h2 class='title'>load_class(path)</h2>
+<section>
+<div class="document">
 </div>
+</section>
+</section>
+<section>
+<h2 class='title'>utc_now()</h2>
+<section>
+<div class="document">
+<p>Return a timezone aware (UTC) datetime object for now.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">returns:</th><td class="field-body">datetime -- now in utc.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section>
+<h2 class='title'>naive_to_utc(dt)</h2>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h2 class='title'>dict_to_utc(obj)</h2>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h2 class='title'>to_utc(dt)</h2>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h2 class='title'>log(*args, logger='root')</h2>
+<section>
+<div class="document">
+<p>Log a line with timestamp and all args.</p>
+</div>
+</section>
+</section>
+<section>
+<h2 class='title'>try_cast(x)</h2>
+<section>
+<div class="document">
+<p>Try to cast a string (or bytes) to a numeric type.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">x:</th><td class="field-body">string to cast</td>
+</tr>
+<tr class="field"><th class="field-name">returns:</th><td class="field-body">int if x can be converted to int, float if x can be converted to float or str otherwise</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section>
+<h2 class='title'>random_string(l_min=3, l_max=10, add_chars='')</h2>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h2 class='title'>slugify(S)</h2>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h2 class='title'>wait(sec)</h2>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h2 class='title'>serialize(obj)</h2>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+<section>
+<h1>Classes</h1>
+<section>
+<h2 class='title'>Sequence(self)</h2>
+<section>
+<div class="document">
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: object</p><ul></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__call__(self)</h3>
+<section>
+<div class="document">
+<p>Call self as a function.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>SerializedSequence(self, name)</h2>
+<section>
+<div class="document">
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.common.Sequence</p><ul><li>microdaemon.common.Sequence</li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__call__(self)</h3>
+<section>
+<div class="document">
+<p>Call self as a function.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_read(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_write(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>NamedSerializedSequence(self, name)</h2>
+<section>
+<div class="document">
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.common.SerializedSequence</p><ul><li>microdaemon.common.SerializedSequence<ul><li>microdaemon.common.Sequence</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__call__(self)</h3>
+<section>
+<div class="document">
+<p>Call self as a function.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_read(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_write(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>LoadClassError(self, /, *args, **kwargs)</h2>
+<section>
+<div class="document">
+<p>Common base class for all non-exit exceptions.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: Exception</p><ul><li>Exception<ul><li>BaseException</li></ul></li></ul></section>
+</section>
+</section>

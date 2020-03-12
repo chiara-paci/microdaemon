@@ -1,6 +1,513 @@
 ---
 name: microdaemon.configurator
 ---
-<h1>microdaemon.configurator</h1><div><div class="document">
+<h1 class='title'>microdaemon.configurator</h1>
+<section>
+<div class="document">
 </div>
+</section>
+<section>
+<h1>Classes</h1>
+<section>
+<h2 class='title'>HtmlElem(self, tag, content=None, attrs=[])</h2>
+<section>
+<div class="document">
+<p>Dictionary that remembers insertion order</p>
 </div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: collections.OrderedDict</p><ul><li>collections.OrderedDict<ul><li>dict</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>AbstractField(self, name, value=None, description=None, default=None, subfield=False)</h2>
+<section>
+<div class="document">
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: abc.ABC</p><ul><li>abc.ABC</li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_clone_args(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>clone(self, value=None)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>InputField(self, name, value=None, description=None, default=None, subfield=False)</h2>
+<section>
+<div class="document">
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.configurator.AbstractField</p><ul><li>microdaemon.configurator.AbstractField<ul><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_clone_args(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_make_widget(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>clone(self, value=None)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>ObjectField(self, name, description=None, fields=[])</h2>
+<section>
+<div class="document">
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.configurator.AbstractField</p><ul><li>microdaemon.configurator.AbstractField<ul><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_clone_args(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_make_widget(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_make_widget_field(self, field)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>clone(self, value=None)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>ProxyField(self, name, description=None, value=None, default=None)</h2>
+<section>
+<div class="document">
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.configurator.ObjectField</p><ul><li>microdaemon.configurator.ObjectField<ul><li>microdaemon.configurator.AbstractField<ul><li>abc.ABC</li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_clone_args(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_create_field(self, name, value_dict, default_dict)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_make_widget(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_make_widget_field(self, field)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>clone(self, value=None)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>ChoiceField(self, name, object_list, value=None, description=None, subfield=False)</h2>
+<section>
+<div class="document">
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.configurator.AbstractField</p><ul><li>microdaemon.configurator.AbstractField<ul><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_clone_args(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_make_widget(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>clone(self, value=None)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>ClassField(self, name, object_list, value=None, description=None, subfield=False)</h2>
+<section>
+<div class="document">
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.configurator.ChoiceField</p><ul><li>microdaemon.configurator.ChoiceField<ul><li>microdaemon.configurator.AbstractField<ul><li>abc.ABC</li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_clone_args(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_make_widget(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>clone(self, value=None)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>MultipleChoiceField(self, name, object_list, value=None, description=None, subfield=False)</h2>
+<section>
+<div class="document">
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.configurator.ChoiceField</p><ul><li>microdaemon.configurator.ChoiceField<ul><li>microdaemon.configurator.AbstractField<ul><li>abc.ABC</li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_clone_args(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_make_widget(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>clone(self, value=None)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>UrlField(self, name, value=None, description=None, default=None, subfield=False)</h2>
+<section>
+<div class="document">
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.configurator.InputField</p><ul><li>microdaemon.configurator.InputField<ul><li>microdaemon.configurator.AbstractField<ul><li>abc.ABC</li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_clone_args(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_make_widget(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>clone(self, value=None)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>PasswordField(self, name, value=None, description=None, default=None, subfield=False)</h2>
+<section>
+<div class="document">
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.configurator.InputField</p><ul><li>microdaemon.configurator.InputField<ul><li>microdaemon.configurator.AbstractField<ul><li>abc.ABC</li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_clone_args(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_make_widget(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>clone(self, value=None)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>IncludeField(self, file_path, value=None, description=None, subfield=False)</h2>
+<section>
+<div class="document">
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.configurator.InputField</p><ul><li>microdaemon.configurator.InputField<ul><li>microdaemon.configurator.AbstractField<ul><li>abc.ABC</li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_clone_args(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_make_widget(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>clone(self, value=None)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>NumberField(self, name, value=None, description=None, default=None, value_min=None, value_max=None, value_step=None, subfield=False)</h2>
+<section>
+<div class="document">
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.configurator.InputField</p><ul><li>microdaemon.configurator.InputField<ul><li>microdaemon.configurator.AbstractField<ul><li>abc.ABC</li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_clone_args(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_make_widget(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>clone(self, value=None)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>BooleanField(self, name, value=None, description=None, default=None, subfield=False)</h2>
+<section>
+<div class="document">
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.configurator.InputField</p><ul><li>microdaemon.configurator.InputField<ul><li>microdaemon.configurator.AbstractField<ul><li>abc.ABC</li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_clone_args(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_make_widget(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>clone(self, value=None)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Configurator(self, config)</h2>
+<section>
+<div class="document">
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: object</p><ul></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>reset_params(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+</section>

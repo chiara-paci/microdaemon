@@ -1,0 +1,288 @@
+---
+name: microdaemon.configclass
+---
+<h1 class='title'>microdaemon.configclass</h1>
+<section>
+<div class="document">
+</div>
+</section>
+<section>
+<h1>Classes</h1>
+<section>
+<h2 class='title'>LogConfig(self, config)</h2>
+<section>
+<div class="document">
+<p>dict() -&gt; new empty dictionary
+dict(mapping) -&gt; new dictionary initialized from a mapping object's</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 3)</p>
+Unexpected indentation.</div>
+<blockquote>
+(key, value) pairs</blockquote>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 4)</p>
+Block quote ends without a blank line; unexpected unindent.</div>
+<dl class="docutils">
+<dt>dict(iterable) -&gt; new dictionary initialized as if via:</dt>
+<dd><p class="first">d = {}
+for k, v in iterable:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 7)</p>
+Unexpected indentation.</div>
+<blockquote class="last">
+d[k] = v</blockquote>
+</dd>
+<dt>dict(<a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs) -&gt; new dictionary initialized with the name=value pairs</dt>
+<dd><div class="first system-message" id="id1">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 8); <em><a href="#id2">backlink</a></em></p>
+Inline strong start-string without end-string.</div>
+<p class="last">in the keyword argument list.  For example:  dict(one=1, two=2)</p>
+</dd>
+</dl>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: dict</p><ul><li>dict</li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_log_handler_rot(self, fname, formatter='simple')</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_log_logger(self, *handlers, level='INFO')</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_handlers(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+<section>
+<h2>Classes</h2>
+<section>
+<h3 class='title'>ErrorOnlyFilter(self)</h3>
+<section>
+<div class="document">
+<p>Filter instances are used to perform arbitrary filtering of LogRecords.</p>
+<p>Loggers and Handlers can optionally use Filter instances to filter
+records as desired. The base filter class only allows events which are
+below a certain point in the logger hierarchy. For example, a filter
+initialized with &quot;A.B&quot; will allow events logged by loggers &quot;A.B&quot;,
+&quot;A.B.C&quot;, &quot;A.B.C.D&quot;, &quot;A.B.D&quot; etc. but not &quot;A.BB&quot;, &quot;B.A.B&quot; etc. If
+initialized with the empty string, all events are passed.</p>
+</div>
+
+</section>
+<section>
+<h3>Parents</h3>
+<p>Bases: logging.Filter</p><ul><li>logging.Filter</li></ul></section>
+<section>
+<h3>Methods</h3>
+<section>
+<h4 class='title'>filter(self, record)</h4>
+<section>
+<div class="document">
+<p>Determine if the specified record is to be logged.</p>
+<p>Is the specified record to be logged? Returns 0 for no, nonzero for
+yes. If deemed appropriate, the record may be modified in-place.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Config(self, name='isambard', base_dir=None, server_name='Isambard')</h2>
+<section>
+<div class="document">
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: object</p><ul></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_base_rel(self, *rel)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_config_rel(self, *rel)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_db_rel(self, *rel)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_share_rel(self, *rel)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_var_rel(self, *rel)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_default(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>setup_config(self, options)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>setup_log(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+<section>
+<h2>Classes</h2>
+<section>
+<h3 class='title'>ConfigurationError(self, /, *args, **kwargs)</h3>
+<section>
+<div class="document">
+<p>Common base class for all non-exit exceptions.</p>
+</div>
+
+</section>
+<section>
+<h3>Parents</h3>
+<p>Bases: Exception</p><ul><li>Exception<ul><li>BaseException</li></ul></li></ul></section>
+</section>
+<section>
+<h3 class='title'>log_config_class(self, config)</h3>
+<section>
+<div class="document">
+<p>dict() -&gt; new empty dictionary
+dict(mapping) -&gt; new dictionary initialized from a mapping object's</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 3)</p>
+Unexpected indentation.</div>
+<blockquote>
+(key, value) pairs</blockquote>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 4)</p>
+Block quote ends without a blank line; unexpected unindent.</div>
+<dl class="docutils">
+<dt>dict(iterable) -&gt; new dictionary initialized as if via:</dt>
+<dd><p class="first">d = {}
+for k, v in iterable:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 7)</p>
+Unexpected indentation.</div>
+<blockquote class="last">
+d[k] = v</blockquote>
+</dd>
+<dt>dict(<a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs) -&gt; new dictionary initialized with the name=value pairs</dt>
+<dd><div class="first system-message" id="id1">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 8); <em><a href="#id2">backlink</a></em></p>
+Inline strong start-string without end-string.</div>
+<p class="last">in the keyword argument list.  For example:  dict(one=1, two=2)</p>
+</dd>
+</dl>
+</div>
+
+</section>
+<section>
+<h3>Parents</h3>
+<p>Bases: dict</p><ul><li>dict</li></ul></section>
+<section>
+<h3>Methods</h3>
+<section>
+<h4 class='title'>_log_handler_rot(self, fname, formatter='simple')</h4>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h4 class='title'>_log_logger(self, *handlers, level='INFO')</h4>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h4 class='title'>get_handlers(self)</h4>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+<section>
+<h3>Classes</h3>
+<section>
+<h4 class='title'>ErrorOnlyFilter(self)</h4>
+<section>
+<div class="document">
+<p>Filter instances are used to perform arbitrary filtering of LogRecords.</p>
+<p>Loggers and Handlers can optionally use Filter instances to filter
+records as desired. The base filter class only allows events which are
+below a certain point in the logger hierarchy. For example, a filter
+initialized with &quot;A.B&quot; will allow events logged by loggers &quot;A.B&quot;,
+&quot;A.B.C&quot;, &quot;A.B.C.D&quot;, &quot;A.B.D&quot; etc. but not &quot;A.BB&quot;, &quot;B.A.B&quot; etc. If
+initialized with the empty string, all events are passed.</p>
+</div>
+
+</section>
+<section>
+<h4>Parents</h4>
+<p>Bases: logging.Filter</p><ul><li>logging.Filter</li></ul></section>
+<section>
+<h4>Methods</h4>
+<section>
+<h5 class='title'>filter(self, record)</h5>
+<section>
+<div class="document">
+<p>Determine if the specified record is to be logged.</p>
+<p>Is the specified record to be logged? Returns 0 for no, nonzero for
+yes. If deemed appropriate, the record may be modified in-place.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+</section>
+</section>
+</section>
+</section>
+</section>

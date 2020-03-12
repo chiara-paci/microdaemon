@@ -1,6 +1,983 @@
 ---
 name: microdaemon.abstracts
 ---
-<h1>microdaemon.abstracts</h1><div><div class="document">
+<h1 class='title'>microdaemon.abstracts</h1>
+<section>
+<div class="document">
 </div>
+</section>
+<section>
+<h1>Classes</h1>
+<section>
+<h2 class='title'>ListProxy(self)</h2>
+<section>
+<div class="document">
+<p>Abstract for masquerading an list.</p>
+<p>A  DictProxy has  list  standard behaviour,  with just  few
+details changed.</p>
 </div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: collections.abc.MutableSequence, abc.ABC</p><ul><li>collections.abc.MutableSequence<ul><li>collections.abc.Sequence<ul><li>collections.abc.Reversible<ul><li>collections.abc.Iterable</li></ul></li><li>collections.abc.Collection<ul><li>collections.abc.Sized</li><li>collections.abc.Iterable</li><li>collections.abc.Container</li></ul></li></ul></li></ul></li><li>abc.ABC</li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__contains__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__delitem__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__getitem__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__iadd__(self, values)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__iter__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__len__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__repr__(self)</h3>
+<section>
+<div class="document">
+<p>Return repr(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__reversed__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__setitem__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>append(self, value)</h3>
+<section>
+<div class="document">
+<p>S.append(value) -- append value to the end of the sequence</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>clear(self)</h3>
+<section>
+<div class="document">
+<p>S.clear() -&gt; None -- remove all items from S</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>count(self, value)</h3>
+<section>
+<div class="document">
+<p>S.count(value) -&gt; integer -- return number of occurrences of value</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>extend(self, values)</h3>
+<section>
+<div class="document">
+<p>S.extend(iterable) -- extend sequence by appending elements from the iterable</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>index(self, value, start=0, stop=None)</h3>
+<section>
+<div class="document">
+<p>S.index(value, [start, [stop]]) -&gt; integer -- return first index of value.
+Raises ValueError if the value is not present.</p>
+<p>Supporting start and stop arguments is optional, but
+recommended.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>insert(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+<p>S.insert(index, value) -- insert value before index</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>pop(self, index=-1)</h3>
+<section>
+<div class="document">
+<p>S.pop([index]) -&gt; item -- remove and return item at index (default last).
+Raise IndexError if list is empty or index is out of range.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>remove(self, value)</h3>
+<section>
+<div class="document">
+<p>S.remove(value) -- remove first occurrence of value.
+Raise ValueError if the value is not present.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>reverse(self)</h3>
+<section>
+<div class="document">
+<p>S.reverse() -- reverse <em>IN PLACE</em></p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>DictProxy(self)</h2>
+<section>
+<div class="document">
+<p>Abstract for masquerading an OrderedDict.</p>
+<p>A  DictProxy has  OrderedDict  standard behaviour,  with just  few
+details changed. See for example SerializedDict.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: collections.abc.MutableMapping, abc.ABC</p><ul><li>collections.abc.MutableMapping<ul><li>collections.abc.Mapping<ul><li>collections.abc.Collection<ul><li>collections.abc.Sized</li><li>collections.abc.Iterable</li><li>collections.abc.Container</li></ul></li></ul></li></ul></li><li>abc.ABC</li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__contains__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__delitem__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__eq__(self, other)</h3>
+<section>
+<div class="document">
+<p>Return self==value.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__getitem__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__iter__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__len__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__repr__(self)</h3>
+<section>
+<div class="document">
+<p>Return repr(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__reversed__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__setitem__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>clear(self)</h3>
+<section>
+<div class="document">
+<p>D.clear() -&gt; None.  Remove all items from D.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get(self, key, default=None)</h3>
+<section>
+<div class="document">
+<p>D.get(k[,d]) -&gt; D[k] if k in D, else d.  d defaults to None.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>items(self)</h3>
+<section>
+<div class="document">
+<p>D.items() -&gt; a set-like object providing a view on D's items</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>keys(self)</h3>
+<section>
+<div class="document">
+<p>D.keys() -&gt; a set-like object providing a view on D's keys</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>pop(self, key, default=<object object at 0x7f683901c070>)</h3>
+<section>
+<div class="document">
+<p>D.pop(k[,d]) -&gt; v, remove specified key and return the corresponding value.
+If key is not found, d is returned if given, otherwise KeyError is raised.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>popitem(self)</h3>
+<section>
+<div class="document">
+<p>D.popitem() -&gt; (k, v), remove and return some (key, value) pair
+as a 2-tuple; but raise KeyError if D is empty.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>setdefault(self, key, default=None)</h3>
+<section>
+<div class="document">
+<p>D.setdefault(k[,d]) -&gt; D.get(k,d), also set D[k]=d if k not in D</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>update(*args, **kwds)</h3>
+<section>
+<div class="document">
+<p>D.update([E, ]**F) -&gt; None.  Update D from mapping/iterable E and F.
+If E present and has a .keys() method, does:     for k in E: D[k] = E[k]
+If E present and lacks .keys() method, does:     for (k, v) in E: D[k] = v
+In either case, this is followed by: for k, v in F.items(): D[k] = v</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>values(self)</h3>
+<section>
+<div class="document">
+<p>D.values() -&gt; an object providing a view on D's values</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>SerializedDict(self, fpath)</h2>
+<section>
+<div class="document">
+<p>A standard OrderedDict that keeps a copy of self on filesystem, in
+''fpath'', in json format.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.abstracts.DictProxy</p><ul><li>microdaemon.abstracts.DictProxy<ul><li>collections.abc.MutableMapping<ul><li>collections.abc.Mapping<ul><li>collections.abc.Collection<ul><li>collections.abc.Sized</li><li>collections.abc.Iterable</li><li>collections.abc.Container</li></ul></li></ul></li></ul></li><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__contains__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__delitem__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__eq__(self, other)</h3>
+<section>
+<div class="document">
+<p>Return self==value.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__getitem__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__iter__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__len__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__repr__(self)</h3>
+<section>
+<div class="document">
+<p>Return repr(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__reversed__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__setitem__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_save(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>clear(self)</h3>
+<section>
+<div class="document">
+<p>D.clear() -&gt; None.  Remove all items from D.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get(self, key, default=None)</h3>
+<section>
+<div class="document">
+<p>D.get(k[,d]) -&gt; D[k] if k in D, else d.  d defaults to None.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>items(self)</h3>
+<section>
+<div class="document">
+<p>D.items() -&gt; a set-like object providing a view on D's items</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>keys(self)</h3>
+<section>
+<div class="document">
+<p>D.keys() -&gt; a set-like object providing a view on D's keys</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>pop(self, key, default=<object object at 0x7f683901c070>)</h3>
+<section>
+<div class="document">
+<p>D.pop(k[,d]) -&gt; v, remove specified key and return the corresponding value.
+If key is not found, d is returned if given, otherwise KeyError is raised.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>popitem(self)</h3>
+<section>
+<div class="document">
+<p>D.popitem() -&gt; (k, v), remove and return some (key, value) pair
+as a 2-tuple; but raise KeyError if D is empty.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>setdefault(self, key, default=None)</h3>
+<section>
+<div class="document">
+<p>D.setdefault(k[,d]) -&gt; D.get(k,d), also set D[k]=d if k not in D</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>update(*args, **kwds)</h3>
+<section>
+<div class="document">
+<p>D.update([E, ]**F) -&gt; None.  Update D from mapping/iterable E and F.
+If E present and has a .keys() method, does:     for k in E: D[k] = E[k]
+If E present and lacks .keys() method, does:     for (k, v) in E: D[k] = v
+In either case, this is followed by: for k, v in F.items(): D[k] = v</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>values(self)</h3>
+<section>
+<div class="document">
+<p>D.values() -&gt; an object providing a view on D's values</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>ListDictCollection(self)</h2>
+<section>
+<div class="document">
+<p>Object list and dictionary.</p>
+<p>You can  append or insert  an object as into  a list, but  you can
+read it or by index (like a list) or by object object_id (like a dict).</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: collections.abc.MutableSequence, abc.ABC</p><ul><li>collections.abc.MutableSequence<ul><li>collections.abc.Sequence<ul><li>collections.abc.Reversible<ul><li>collections.abc.Iterable</li></ul></li><li>collections.abc.Collection<ul><li>collections.abc.Sized</li><li>collections.abc.Iterable</li><li>collections.abc.Container</li></ul></li></ul></li></ul></li><li>abc.ABC</li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__contains__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__delitem__(self, key)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__getitem__(self, key)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__iadd__(self, values)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__iter__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__len__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__reversed__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__setitem__(self, key, obj)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_insert(self, key, obj)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>append(self, value)</h3>
+<section>
+<div class="document">
+<p>S.append(value) -- append value to the end of the sequence</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>clear(self)</h3>
+<section>
+<div class="document">
+<p>S.clear() -&gt; None -- remove all items from S</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>count(self, value)</h3>
+<section>
+<div class="document">
+<p>S.count(value) -&gt; integer -- return number of occurrences of value</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>extend(self, values)</h3>
+<section>
+<div class="document">
+<p>S.extend(iterable) -- extend sequence by appending elements from the iterable</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>index(self, value, start=0, stop=None)</h3>
+<section>
+<div class="document">
+<p>S.index(value, [start, [stop]]) -&gt; integer -- return first index of value.
+Raises ValueError if the value is not present.</p>
+<p>Supporting start and stop arguments is optional, but
+recommended.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>insert(self, key, obj)</h3>
+<section>
+<div class="document">
+<p>S.insert(index, value) -- insert value before index</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>pop(self, index=-1)</h3>
+<section>
+<div class="document">
+<p>S.pop([index]) -&gt; item -- remove and return item at index (default last).
+Raise IndexError if list is empty or index is out of range.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>remove(self, value)</h3>
+<section>
+<div class="document">
+<p>S.remove(value) -- remove first occurrence of value.
+Raise ValueError if the value is not present.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>reverse(self)</h3>
+<section>
+<div class="document">
+<p>S.reverse() -- reverse <em>IN PLACE</em></p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>sort(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+<section>
+<h2>Classes</h2>
+<section>
+<h3 class='title'>OneTimeDict(self, /, *args, **kwargs)</h3>
+<section>
+<div class="document">
+<p>dict() -&gt; new empty dictionary
+dict(mapping) -&gt; new dictionary initialized from a mapping object's</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 3)</p>
+Unexpected indentation.</div>
+<blockquote>
+(key, value) pairs</blockquote>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 4)</p>
+Block quote ends without a blank line; unexpected unindent.</div>
+<dl class="docutils">
+<dt>dict(iterable) -&gt; new dictionary initialized as if via:</dt>
+<dd><p class="first">d = {}
+for k, v in iterable:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 7)</p>
+Unexpected indentation.</div>
+<blockquote class="last">
+d[k] = v</blockquote>
+</dd>
+<dt>dict(<a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs) -&gt; new dictionary initialized with the name=value pairs</dt>
+<dd><div class="first system-message" id="id1">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 8); <em><a href="#id2">backlink</a></em></p>
+Inline strong start-string without end-string.</div>
+<p class="last">in the keyword argument list.  For example:  dict(one=1, two=2)</p>
+</dd>
+</dl>
+</div>
+
+</section>
+<section>
+<h3>Parents</h3>
+<p>Bases: dict</p><ul><li>dict</li></ul></section>
+<section>
+<h3>Methods</h3>
+<section>
+<h4 class='title'>__setitem__(self, key, obj)</h4>
+<section>
+<div class="document">
+<p>Set self[key] to value.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>ObjectDuplicateException(self, /, *args, **kwargs)</h2>
+<section>
+<div class="document">
+<p>Common base class for all non-exit exceptions.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: Exception</p><ul><li>Exception<ul><li>BaseException</li></ul></li></ul></section>
+</section>
+<section>
+<h2 class='title'>ObjectCollection(self, conf)</h2>
+<section>
+<div class="document">
+<p>Object list and dictionary.</p>
+<p>You can  append or insert  an object as into  a list, but  you can
+read it or by index (like a list) or by object object_id (like a dict).</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.abstracts.ListDictCollection, abc.ABC</p><ul><li>microdaemon.abstracts.ListDictCollection<ul><li>collections.abc.MutableSequence<ul><li>collections.abc.Sequence<ul><li>collections.abc.Reversible<ul><li>collections.abc.Iterable</li></ul></li><li>collections.abc.Collection<ul><li>collections.abc.Sized</li><li>collections.abc.Iterable</li><li>collections.abc.Container</li></ul></li></ul></li></ul></li><li>abc.ABC</li></ul></li><li>abc.ABC</li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__call__(self, **kwargs)</h3>
+<section>
+<div class="document">
+<p>Call self as a function.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__contains__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__delitem__(self, key)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__getitem__(self, key)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__iadd__(self, values)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__iter__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__len__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__reversed__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__serialize__(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__setitem__(self, key, obj)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_insert(self, key, obj)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>append(self, value)</h3>
+<section>
+<div class="document">
+<p>S.append(value) -- append value to the end of the sequence</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>clear(self)</h3>
+<section>
+<div class="document">
+<p>S.clear() -&gt; None -- remove all items from S</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>count(self, value)</h3>
+<section>
+<div class="document">
+<p>S.count(value) -&gt; integer -- return number of occurrences of value</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>extend(self, values)</h3>
+<section>
+<div class="document">
+<p>S.extend(iterable) -- extend sequence by appending elements from the iterable</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>factory(desc)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>index(self, value, start=0, stop=None)</h3>
+<section>
+<div class="document">
+<p>S.index(value, [start, [stop]]) -&gt; integer -- return first index of value.
+Raises ValueError if the value is not present.</p>
+<p>Supporting start and stop arguments is optional, but
+recommended.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>insert(self, key, obj)</h3>
+<section>
+<div class="document">
+<p>S.insert(index, value) -- insert value before index</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>pop(self, index=-1)</h3>
+<section>
+<div class="document">
+<p>S.pop([index]) -&gt; item -- remove and return item at index (default last).
+Raise IndexError if list is empty or index is out of range.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>remove(self, value)</h3>
+<section>
+<div class="document">
+<p>S.remove(value) -- remove first occurrence of value.
+Raise ValueError if the value is not present.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>reverse(self)</h3>
+<section>
+<div class="document">
+<p>S.reverse() -- reverse <em>IN PLACE</em></p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>sort(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+<section>
+<h2>Classes</h2>
+<section>
+<h3 class='title'>OneTimeDict(self, /, *args, **kwargs)</h3>
+<section>
+<div class="document">
+<p>dict() -&gt; new empty dictionary
+dict(mapping) -&gt; new dictionary initialized from a mapping object's</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 3)</p>
+Unexpected indentation.</div>
+<blockquote>
+(key, value) pairs</blockquote>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 4)</p>
+Block quote ends without a blank line; unexpected unindent.</div>
+<dl class="docutils">
+<dt>dict(iterable) -&gt; new dictionary initialized as if via:</dt>
+<dd><p class="first">d = {}
+for k, v in iterable:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 7)</p>
+Unexpected indentation.</div>
+<blockquote class="last">
+d[k] = v</blockquote>
+</dd>
+<dt>dict(<a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs) -&gt; new dictionary initialized with the name=value pairs</dt>
+<dd><div class="first system-message" id="id1">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 8); <em><a href="#id2">backlink</a></em></p>
+Inline strong start-string without end-string.</div>
+<p class="last">in the keyword argument list.  For example:  dict(one=1, two=2)</p>
+</dd>
+</dl>
+</div>
+
+</section>
+<section>
+<h3>Parents</h3>
+<p>Bases: dict</p><ul><li>dict</li></ul></section>
+<section>
+<h3>Methods</h3>
+<section>
+<h4 class='title'>__setitem__(self, key, obj)</h4>
+<section>
+<div class="document">
+<p>Set self[key] to value.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+</section>
+</section>
+</section>

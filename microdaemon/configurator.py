@@ -343,7 +343,6 @@ class Configurator(object):
             InputField("time_zone",value=self._config.TZ_LABEL,default=self._config.default["time_zone"]),
         ]
 
-
     def __init__(self,config):
         self._config=config
         self.reset_params()

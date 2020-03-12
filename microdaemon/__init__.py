@@ -1,6 +1,12 @@
+import sys
+
 name="microdaemon"
 
-__all__ = ["abstracts", "channels", "common", "config",
+from . import configclass
+
+config=configclass.Config()
+
+__all__ = ["abstracts", "channels", "common", "config","configclass",
            "configurator","database","jsonlib","pages",
            "responses","server","threads"]
 

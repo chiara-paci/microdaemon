@@ -1,13 +1,44 @@
 <!doctype html>
 <html>
+
   <head>
     <meta charset="utf-8">
     <title>{{ page.title }}</title>
-    <link rel="stylesheet" href="/assets/css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/398c6b2bdc.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href='{{ "/assets/css/styles.css"  | relative_url }}'>
+    <link rel="icon" href='{{ "/assets/brand/favicon.png" | relative_url }}' type="image/jpeg">
     {% seo %}
   </head>
+
   <body>
-    {% include navigation.html %}
+
+    <header>
+
+      <div>
+	<h1>Microdaemon</h1>
+      <a href='{{ "/"  | relative_url }}'>
+	<img alt="logo grande" src='{{ "/assets/brand/logo.svg" | relative_url }}'/>
+      </a>
+      </div>
+
+      {% include navigation.html %}
+
+    </header>
+
+    <main>
+
     {{ content }}
+
+    </main>
+    
+    <footer>
+      <section>
+	<p>© 2003-2021 <a href="http://www.gianoziaorientale.org">Gianozia Orientale</a></p>
+      </section>
+
+    </footer>
+
   </body>
 </html>

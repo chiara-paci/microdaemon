@@ -112,7 +112,7 @@ class LogConfig(dict):
         }
 
 
-class _Config(object):
+class Config(object):
 
     class ConfigurationError(Exception): pass
 
@@ -123,7 +123,7 @@ class _Config(object):
 
     TEMPLATE_NAMES = {                           #: Template names
         "homepage":         "index.html",
-        "object_list":         "object_list.html",
+        "object_list":      "object_list.html",
         "418":              "418.html",
         "error":            "error.html",
         "text":             "text.html",

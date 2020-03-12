@@ -1,10 +1,6 @@
 - name: Home
   link: /
-- name: About
-  link: /about.html
-- name: Blog
-  link: /blog.html
-- name: Staff
-  link: /staff.html
 - name: API
   link: /api.html
+- name: Class Tree
+  link: /class_tree.html

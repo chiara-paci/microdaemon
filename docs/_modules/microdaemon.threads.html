@@ -1,6 +1,551 @@
 ---
 name: microdaemon.threads
 ---
-<h1>microdaemon.threads</h1><div><div class="document">
+<h1 class='title'>microdaemon.threads</h1>
+<section>
+<div class="document">
 </div>
+</section>
+<section>
+<h1>Classes</h1>
+<section>
+<h2 class='title'>WhileTrueThread(self, group=None, target=None, name=None, args=(), kwargs=None, *, daemon=None)</h2>
+<section>
+<div class="document">
+<p>A class that represents a thread of control.</p>
+<p>This class can be safely subclassed in a limited fashion. There are two ways
+to specify the activity: by passing a callable object to the constructor, or
+by overriding the run() method in a subclass.</p>
 </div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: threading.Thread</p><ul><li>threading.Thread</li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__repr__(self)</h3>
+<section>
+<div class="document">
+<p>Return repr(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_bootstrap(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_bootstrap_inner(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_delete(self)</h3>
+<section>
+<div class="document">
+<p>Remove current thread from the dict of currently running threads.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_reset_internal_locks(self, is_alive)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_set_ident(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_set_tstate_lock(self)</h3>
+<section>
+<div class="document">
+<p>Set a lock object which will be released by the interpreter when
+the underlying thread state (see pystate.h) gets deleted.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_stop(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_wait_for_tstate_lock(self, block=True, timeout=-1)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>getName(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>isAlive(self)</h3>
+<section>
+<div class="document">
+<p>Return whether the thread is alive.</p>
+<p>This method is deprecated, use is_alive() instead.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>isDaemon(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>is_alive(self)</h3>
+<section>
+<div class="document">
+<p>Return whether the thread is alive.</p>
+<p>This method returns True just before the run() method starts until just
+after the run() method terminates. The module function enumerate()
+returns a list of all alive threads.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>join(self, timeout=None)</h3>
+<section>
+<div class="document">
+<p>Wait until the thread terminates.</p>
+<p>This blocks the calling thread until the thread whose join() method is
+called terminates -- either normally or through an unhandled exception
+or until the optional timeout occurs.</p>
+<p>When the timeout argument is present and not None, it should be a
+floating point number specifying a timeout for the operation in seconds
+(or fractions thereof). As join() always returns None, you must call
+is_alive() after join() to decide whether a timeout happened -- if the
+thread is still alive, the join() call timed out.</p>
+<p>When the timeout argument is not present or None, the operation will
+block until the thread terminates.</p>
+<p>A thread can be join()ed many times.</p>
+<p>join() raises a RuntimeError if an attempt is made to join the current
+thread as that would cause a deadlock. It is also an error to join() a
+thread before it has been started and attempts to do so raises the same
+exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>run(self)</h3>
+<section>
+<div class="document">
+<p>Method representing the thread's activity.</p>
+<p>You may override this method in a subclass. The standard run() method
+invokes the callable object passed to the object's constructor as the
+target argument, if any, with sequential and keyword arguments taken
+from the args and kwargs arguments, respectively.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>setDaemon(self, daemonic)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>setName(self, name)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>start(self)</h3>
+<section>
+<div class="document">
+<p>Start the thread's activity.</p>
+<p>It must be called at most once per thread object. It arranges for the
+object's run() method to be invoked in a separate thread of control.</p>
+<p>This method will raise a RuntimeError if called more than once on the
+same thread object.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>WaitWhileTrueThread(self, timeout, **kwargs)</h2>
+<section>
+<div class="document">
+<p>A class that represents a thread of control.</p>
+<p>This class can be safely subclassed in a limited fashion. There are two ways
+to specify the activity: by passing a callable object to the constructor, or
+by overriding the run() method in a subclass.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: threading.Thread</p><ul><li>threading.Thread</li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__repr__(self)</h3>
+<section>
+<div class="document">
+<p>Return repr(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_bootstrap(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_bootstrap_inner(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_delete(self)</h3>
+<section>
+<div class="document">
+<p>Remove current thread from the dict of currently running threads.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_reset_internal_locks(self, is_alive)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_set_ident(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_set_tstate_lock(self)</h3>
+<section>
+<div class="document">
+<p>Set a lock object which will be released by the interpreter when
+the underlying thread state (see pystate.h) gets deleted.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_stop(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_wait_for_tstate_lock(self, block=True, timeout=-1)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>getName(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>isAlive(self)</h3>
+<section>
+<div class="document">
+<p>Return whether the thread is alive.</p>
+<p>This method is deprecated, use is_alive() instead.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>isDaemon(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>is_alive(self)</h3>
+<section>
+<div class="document">
+<p>Return whether the thread is alive.</p>
+<p>This method returns True just before the run() method starts until just
+after the run() method terminates. The module function enumerate()
+returns a list of all alive threads.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>join(self, timeout=None)</h3>
+<section>
+<div class="document">
+<p>Wait until the thread terminates.</p>
+<p>This blocks the calling thread until the thread whose join() method is
+called terminates -- either normally or through an unhandled exception
+or until the optional timeout occurs.</p>
+<p>When the timeout argument is present and not None, it should be a
+floating point number specifying a timeout for the operation in seconds
+(or fractions thereof). As join() always returns None, you must call
+is_alive() after join() to decide whether a timeout happened -- if the
+thread is still alive, the join() call timed out.</p>
+<p>When the timeout argument is not present or None, the operation will
+block until the thread terminates.</p>
+<p>A thread can be join()ed many times.</p>
+<p>join() raises a RuntimeError if an attempt is made to join the current
+thread as that would cause a deadlock. It is also an error to join() a
+thread before it has been started and attempts to do so raises the same
+exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>run(self)</h3>
+<section>
+<div class="document">
+<p>Method representing the thread's activity.</p>
+<p>You may override this method in a subclass. The standard run() method
+invokes the callable object passed to the object's constructor as the
+target argument, if any, with sequential and keyword arguments taken
+from the args and kwargs arguments, respectively.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>setDaemon(self, daemonic)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>setName(self, name)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>start(self)</h3>
+<section>
+<div class="document">
+<p>Start the thread's activity.</p>
+<p>It must be called at most once per thread object. It arranges for the
+object's run() method to be invoked in a separate thread of control.</p>
+<p>This method will raise a RuntimeError if called more than once on the
+same thread object.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>WaitRandomStartThread(self, timeout, **kwargs)</h2>
+<section>
+<div class="document">
+<p>A class that represents a thread of control.</p>
+<p>This class can be safely subclassed in a limited fashion. There are two ways
+to specify the activity: by passing a callable object to the constructor, or
+by overriding the run() method in a subclass.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: threading.Thread</p><ul><li>threading.Thread</li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__repr__(self)</h3>
+<section>
+<div class="document">
+<p>Return repr(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_bootstrap(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_bootstrap_inner(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_delete(self)</h3>
+<section>
+<div class="document">
+<p>Remove current thread from the dict of currently running threads.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_reset_internal_locks(self, is_alive)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_set_ident(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_set_tstate_lock(self)</h3>
+<section>
+<div class="document">
+<p>Set a lock object which will be released by the interpreter when
+the underlying thread state (see pystate.h) gets deleted.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_stop(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_wait_for_tstate_lock(self, block=True, timeout=-1)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>getName(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>isAlive(self)</h3>
+<section>
+<div class="document">
+<p>Return whether the thread is alive.</p>
+<p>This method is deprecated, use is_alive() instead.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>isDaemon(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>is_alive(self)</h3>
+<section>
+<div class="document">
+<p>Return whether the thread is alive.</p>
+<p>This method returns True just before the run() method starts until just
+after the run() method terminates. The module function enumerate()
+returns a list of all alive threads.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>join(self, timeout=None)</h3>
+<section>
+<div class="document">
+<p>Wait until the thread terminates.</p>
+<p>This blocks the calling thread until the thread whose join() method is
+called terminates -- either normally or through an unhandled exception
+or until the optional timeout occurs.</p>
+<p>When the timeout argument is present and not None, it should be a
+floating point number specifying a timeout for the operation in seconds
+(or fractions thereof). As join() always returns None, you must call
+is_alive() after join() to decide whether a timeout happened -- if the
+thread is still alive, the join() call timed out.</p>
+<p>When the timeout argument is not present or None, the operation will
+block until the thread terminates.</p>
+<p>A thread can be join()ed many times.</p>
+<p>join() raises a RuntimeError if an attempt is made to join the current
+thread as that would cause a deadlock. It is also an error to join() a
+thread before it has been started and attempts to do so raises the same
+exception.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>run(self)</h3>
+<section>
+<div class="document">
+<p>Method representing the thread's activity.</p>
+<p>You may override this method in a subclass. The standard run() method
+invokes the callable object passed to the object's constructor as the
+target argument, if any, with sequential and keyword arguments taken
+from the args and kwargs arguments, respectively.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>setDaemon(self, daemonic)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>setName(self, name)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>start(self)</h3>
+<section>
+<div class="document">
+<p>Start the thread's activity.</p>
+<p>It must be called at most once per thread object. It arranges for the
+object's run() method to be invoked in a separate thread of control.</p>
+<p>This method will raise a RuntimeError if called more than once on the
+same thread object.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+</section>

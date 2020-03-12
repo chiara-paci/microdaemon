@@ -1,0 +1,44 @@
+---
+layout: default
+title: Class Tree
+---
+
+<article class="tree">
+<h1 class="title">Class Tree</h1>
+
+<section class="tree">
+    <div class="svg">
+    <svg width="100" height="600"></svg>
+    </div>
+</section>
+
+{{ site.data.class_tree }}
+
+</article>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.15.0/d3.min.js"></script>
+<script src='{{ "/assets/js/tree.js" | relative_url }}'></script>
+
+<script>
+
+  var W=$("section.tree div.svg").width();
+  var H=$("section.tree div.svg").height();
+  $("section.tree svg").width(W);
+  $("section.tree svg").height(H);
+  
+
+  d3.json('{{ "/assets/json/class_tree.json" | relative_url }}')
+    .then(function(data) {
+	console.log(data);
+	nodes=data["nodes"];
+	links=data["links"];
+
+	mytree("section.tree svg",W,H,nodes,links);
+
+    });
+
+
+</script>
+
+
+

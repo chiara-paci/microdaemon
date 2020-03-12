@@ -1,7 +1,392 @@
 ---
 name: microdaemon.server
 ---
-<h1>microdaemon.server</h1><div><div class="document">
+<h1 class='title'>microdaemon.server</h1>
+<section>
+<div class="document">
 <p>Isambard server, the main isambard object.</p>
 </div>
+</section>
+<section>
+<h1>Classes</h1>
+<section>
+<h2 class='title'>Request(self, server, environ)</h2>
+<section>
+<div class="document">
+<p>Request from user.</p>
+<dl class="docutils">
+<dt><em>server</em> (IsambardServer)</dt>
+<dd>The server serving the request.</dd>
+<dt><em>environ</em> (dict)</dt>
+<dd>The wsgi environ object.</dd>
+<dt>Attributes:</dt>
+<dd><dl class="first last docutils">
+<dt><em>method</em> (str)</dt>
+<dd>Request methods in uppercase (GET, POST, etc.).</dd>
+<dt><em>path</em> (str)</dt>
+<dd>Request path.</dd>
+<dt><em>path_split</em> (list)</dt>
+<dd>List of path elements.</dd>
+<dt><em>script</em> (str)</dt>
+<dd>Script name.</dd>
+<dt><em>accept</em> (str)</dt>
+<dd>Response mimetype requested by client or text/html if client doesn't supply it.</dd>
+<dt><em>body</em> (str)</dt>
+<dd>Request body.</dd>
+<dt><em>querystring</em> (dict)</dt>
+<dd>Querystring parameters.</dd>
+<dt><em>cookies</em> (dict)</dt>
+<dd>Cookies from client.</dd>
+</dl>
+</dd>
+</dl>
 </div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: object</p><ul></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_body(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_cookies(self, environ)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_path_split(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_querystring(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_querystring_old(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Server(self, bus, host='localhost', port=7373)</h2>
+<section>
+<div class="document">
+<p>Main object.</p>
+<dl class="docutils">
+<dt><em>bus</em> (channels.Bus)</dt>
+<dd>Communication bus common to all objects.</dd>
+<dt><em>port</em> (int)</dt>
+<dd>Port to bind.</dd>
+<dt><em>host</em> (str)</dt>
+<dd>Host to bind.</dd>
+</dl>
+<p>A  <cite>Server</cite> object  is  the interface  between user  and
+other components of a Microdaemon. It  run a WSGI server listening on
+host <em>host</em> and port <em>port</em> (default 7373 on localhost).  The user
+can connect with a  browser to &quot;<a class="reference external" href="http://">http://</a><em>host</em>:<em>port</em>&quot; and interact
+in this way.</p>
+<dl class="docutils">
+<dt>Attributes:</dt>
+<dd><dl class="first last docutils">
+<dt><em>bus</em> (channels.Bus)</dt>
+<dd>Communication bus common to all objects.</dd>
+</dl>
+</dd>
+</dl>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: object</p><ul></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_application(self, request)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_socketio_decorator(self, wsgi)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>page_factory(self, request)</h3>
+<section>
+<div class="document">
+<p>Transform a request in a Page object.</p>
+<dl class="docutils">
+<dt><em>request</em> (Request)</dt>
+<dd>Request from user.</dd>
+</dl>
+<p>Return    a   Page    (or    subclass)    object   or    raise
+pages.Http404NotFound(request) if <em>request</em> has no valid path.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>start(self)</h3>
+<section>
+<div class="document">
+<p>Main function.</p>
+<p>Run a WSGI simple server with <cite>self.wsgi</cite> as main function.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>wsgi(self, environ, start_response)</h3>
+<section>
+<div class="document">
+<p>WSGI function interface.</p>
+<dl class="docutils">
+<dt><em>environ</em> (dict)</dt>
+<dd>WSGI environ.</dd>
+<dt><em>start_response</em> (callable)</dt>
+<dd>WSGI start_response</dd>
+</dl>
+<p>Build  a request  around  <em>environ</em>, call  <cite>self.application</cite>,
+obtain   a  response   and   call  (as   per  WSGI   protocol)
+<cite>start_response(response.status, response.headers)</cite>.
+Return <cite>response.body_iterable</cite> (as per WSGI protocol).</p>
+</div>
+</section>
+</section>
+</section>
+<section>
+<h2>Classes</h2>
+<section>
+<h3 class='title'>InfoNamespace(self, server, *args, **kwargs)</h3>
+<section>
+<div class="document">
+<p>Base class for server-side class-based namespaces.</p>
+<p>A class-based namespace is a class that contains all the event handlers
+for a Socket.IO namespace. The event handlers are methods of the class
+with the prefix <tt class="docutils literal">on_</tt>, such as <tt class="docutils literal">on_connect</tt>, <tt class="docutils literal">on_disconnect</tt>,
+<tt class="docutils literal">on_message</tt>, <tt class="docutils literal">on_json</tt>, and so on.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name" colspan="2">param namespace:</th></tr>
+<tr class="field"><td>&nbsp;</td><td class="field-body">The Socket.IO namespace to be used with all the event
+handlers defined in this class. If this argument is
+omitted, the default namespace is used.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</section>
+<section>
+<h3>Parents</h3>
+<p>Bases: socketio.namespace.Namespace</p><ul><li>socketio.namespace.Namespace<ul><li>socketio.namespace.BaseNamespace</li></ul></li></ul></section>
+<section>
+<h3>Methods</h3>
+<section>
+<h4 class='title'>_set_server(self, server)</h4>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h4 class='title'>close_room(self, room, namespace=None)</h4>
+<section>
+<div class="document">
+<p>Close a room.</p>
+<p>The only difference with the <a href="#id1"><span class="problematic" id="id2">:func:`socketio.Server.close_room`</span></a> method
+is that when the <tt class="docutils literal">namespace</tt> argument is not given the namespace
+associated with the class is used.</p>
+<div class="system-message" id="id1">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 3); <em><a href="#id2">backlink</a></em></p>
+Unknown interpreted text role &quot;func&quot;.</div>
+</div>
+</section>
+</section>
+<section>
+<h4 class='title'>disconnect(self, sid, namespace=None)</h4>
+<section>
+<div class="document">
+<p>Disconnect a client.</p>
+<p>The only difference with the <a href="#id1"><span class="problematic" id="id2">:func:`socketio.Server.disconnect`</span></a> method
+is that when the <tt class="docutils literal">namespace</tt> argument is not given the namespace
+associated with the class is used.</p>
+<div class="system-message" id="id1">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 3); <em><a href="#id2">backlink</a></em></p>
+Unknown interpreted text role &quot;func&quot;.</div>
+</div>
+</section>
+</section>
+<section>
+<h4 class='title'>emit(self, event, data=None, room=None, skip_sid=None, namespace=None, callback=None)</h4>
+<section>
+<div class="document">
+<p>Emit a custom event to one or more connected clients.</p>
+<p>The only difference with the <a href="#id1"><span class="problematic" id="id2">:func:`socketio.Server.emit`</span></a> method is
+that when the <tt class="docutils literal">namespace</tt> argument is not given the namespace
+associated with the class is used.</p>
+<div class="system-message" id="id1">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 3); <em><a href="#id2">backlink</a></em></p>
+Unknown interpreted text role &quot;func&quot;.</div>
+</div>
+</section>
+</section>
+<section>
+<h4 class='title'>enter_room(self, sid, room, namespace=None)</h4>
+<section>
+<div class="document">
+<p>Enter a room.</p>
+<p>The only difference with the <a href="#id1"><span class="problematic" id="id2">:func:`socketio.Server.enter_room`</span></a> method
+is that when the <tt class="docutils literal">namespace</tt> argument is not given the namespace
+associated with the class is used.</p>
+<div class="system-message" id="id1">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 3); <em><a href="#id2">backlink</a></em></p>
+Unknown interpreted text role &quot;func&quot;.</div>
+</div>
+</section>
+</section>
+<section>
+<h4 class='title'>get_session(self, sid, namespace=None)</h4>
+<section>
+<div class="document">
+<p>Return the user session for a client.</p>
+<p>The only difference with the <a href="#id1"><span class="problematic" id="id2">:func:`socketio.Server.get_session`</span></a>
+method is that when the <tt class="docutils literal">namespace</tt> argument is not given the
+namespace associated with the class is used.</p>
+<div class="system-message" id="id1">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 3); <em><a href="#id2">backlink</a></em></p>
+Unknown interpreted text role &quot;func&quot;.</div>
+</div>
+</section>
+</section>
+<section>
+<h4 class='title'>is_asyncio_based(self)</h4>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h4 class='title'>leave_room(self, sid, room, namespace=None)</h4>
+<section>
+<div class="document">
+<p>Leave a room.</p>
+<p>The only difference with the <a href="#id1"><span class="problematic" id="id2">:func:`socketio.Server.leave_room`</span></a> method
+is that when the <tt class="docutils literal">namespace</tt> argument is not given the namespace
+associated with the class is used.</p>
+<div class="system-message" id="id1">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 3); <em><a href="#id2">backlink</a></em></p>
+Unknown interpreted text role &quot;func&quot;.</div>
+</div>
+</section>
+</section>
+<section>
+<h4 class='title'>on_connect(self, sid, environ)</h4>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h4 class='title'>on_disconnect(self, sid)</h4>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h4 class='title'>rooms(self, sid, namespace=None)</h4>
+<section>
+<div class="document">
+<p>Return the rooms a client is in.</p>
+<p>The only difference with the <a href="#id1"><span class="problematic" id="id2">:func:`socketio.Server.rooms`</span></a> method is
+that when the <tt class="docutils literal">namespace</tt> argument is not given the namespace
+associated with the class is used.</p>
+<div class="system-message" id="id1">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 3); <em><a href="#id2">backlink</a></em></p>
+Unknown interpreted text role &quot;func&quot;.</div>
+</div>
+</section>
+</section>
+<section>
+<h4 class='title'>save_session(self, sid, session, namespace=None)</h4>
+<section>
+<div class="document">
+<p>Store the user session for a client.</p>
+<p>The only difference with the <a href="#id1"><span class="problematic" id="id2">:func:`socketio.Server.save_session`</span></a>
+method is that when the <tt class="docutils literal">namespace</tt> argument is not given the
+namespace associated with the class is used.</p>
+<div class="system-message" id="id1">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 3); <em><a href="#id2">backlink</a></em></p>
+Unknown interpreted text role &quot;func&quot;.</div>
+</div>
+</section>
+</section>
+<section>
+<h4 class='title'>send(self, data, room=None, skip_sid=None, namespace=None, callback=None)</h4>
+<section>
+<div class="document">
+<p>Send a message to one or more connected clients.</p>
+<p>The only difference with the <a href="#id1"><span class="problematic" id="id2">:func:`socketio.Server.send`</span></a> method is
+that when the <tt class="docutils literal">namespace</tt> argument is not given the namespace
+associated with the class is used.</p>
+<div class="system-message" id="id1">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 3); <em><a href="#id2">backlink</a></em></p>
+Unknown interpreted text role &quot;func&quot;.</div>
+</div>
+</section>
+</section>
+<section>
+<h4 class='title'>session(self, sid, namespace=None)</h4>
+<section>
+<div class="document">
+<p>Return the user session for a client with context manager syntax.</p>
+<p>The only difference with the <a href="#id1"><span class="problematic" id="id2">:func:`socketio.Server.session`</span></a> method is
+that when the <tt class="docutils literal">namespace</tt> argument is not given the namespace
+associated with the class is used.</p>
+<div class="system-message" id="id1">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 3); <em><a href="#id2">backlink</a></em></p>
+Unknown interpreted text role &quot;func&quot;.</div>
+</div>
+</section>
+</section>
+<section>
+<h4 class='title'>trigger_event(self, event, *args)</h4>
+<section>
+<div class="document">
+<p>Dispatch an event to the proper handler method.</p>
+<p>In the most common usage, this method is not overloaded by subclasses,
+as it performs the routing of events to methods. However, this
+method can be overriden if special dispatching rules are needed, or if
+having a single method that catches all events is desired.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+</section>
+</section>
+</section>

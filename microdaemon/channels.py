@@ -1,24 +1,26 @@
 """ This module define communication bus, channels and exceptions related to message queues.
 
-Exceptions:
-    *ChannelDefinitionConflict*
-         Raised when a channel is defined more than one time with two different classes.
-    *NoReceiverOnChannel*
-         Raised when a receiver try to read a message without registration on channel.
+Exceptions
+----------
+ChannelDefinitionConflict
+     Raised when a channel is defined more than one time with two different classes.
+NoReceiverOnChannel
+     Raised when a receiver try to read a message without registration on channel.
 
-Classes:
-    *Bus*
-         A dictionary of channels.
-    *Channel*
-         Abstract class for defining a channel.
-    *SimpleChannel*
-         A channel with one receiver.
-    *BroadcastChannel* 
-         A channel with multiple receivers.
-    *RouterChannel*
-         A channel with multiple receivers, where each receiver can read only a subset of messages.
-    *SerializerChannel*
-         A channel with one receiver, able to requeue objects and serialize it until dismissed*
+Classes
+-------
+Bus
+     A dictionary of channels.
+Channel
+     Abstract class for defining a channel.
+SimpleChannel
+     A channel with one receiver.
+BroadcastChannel 
+     A channel with multiple receivers.
+RouterChannel
+     A channel with multiple receivers, where each receiver can read only a subset of messages.
+SerializerChannel
+     A channel with one receiver, able to requeue objects and serialize it until dismissed*
 
 """
 

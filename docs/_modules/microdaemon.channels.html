@@ -1,33 +1,956 @@
 ---
 name: microdaemon.channels
 ---
-<h1>microdaemon.channels</h1><div><div class="document">
+<h1 class='title'>microdaemon.channels</h1>
+<section>
+<div class="document">
 <p>This module define communication bus, channels and exceptions related to message queues.</p>
+<div class="section" id="exceptions">
+<h1>Exceptions</h1>
 <dl class="docutils">
-<dt>Exceptions:</dt>
-<dd><dl class="first last docutils">
-<dt><em>ChannelDefinitionConflict</em></dt>
+<dt>ChannelDefinitionConflict</dt>
 <dd>Raised when a channel is defined more than one time with two different classes.</dd>
-<dt><em>NoReceiverOnChannel</em></dt>
+<dt>NoReceiverOnChannel</dt>
 <dd>Raised when a receiver try to read a message without registration on channel.</dd>
 </dl>
-</dd>
-<dt>Classes:</dt>
-<dd><dl class="first last docutils">
-<dt><em>Bus</em></dt>
+</div>
+<div class="section" id="classes">
+<h1>Classes</h1>
+<dl class="docutils">
+<dt>Bus</dt>
 <dd>A dictionary of channels.</dd>
-<dt><em>Channel</em></dt>
+<dt>Channel</dt>
 <dd>Abstract class for defining a channel.</dd>
-<dt><em>SimpleChannel</em></dt>
+<dt>SimpleChannel</dt>
 <dd>A channel with one receiver.</dd>
-<dt><em>BroadcastChannel</em></dt>
+<dt>BroadcastChannel</dt>
 <dd>A channel with multiple receivers.</dd>
-<dt><em>RouterChannel</em></dt>
+<dt>RouterChannel</dt>
 <dd>A channel with multiple receivers, where each receiver can read only a subset of messages.</dd>
-<dt><em>SerializerChannel</em></dt>
+<dt>SerializerChannel</dt>
 <dd>A channel with one receiver, able to requeue objects and serialize it until dismissed*</dd>
 </dl>
-</dd>
+</div>
+</div>
+</section>
+<section>
+<h1>Classes</h1>
+<section>
+<h2 class='title'>ChannelDefinitionConflict(self, channel_id, old_channel, new_channel)</h2>
+<section>
+<div class="document">
+<p>Raised when a channel is defined more than one time with two different classes</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: Exception</p><ul><li>Exception<ul><li>BaseException</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>NoReceiverOnChannel(self, receiver_id)</h2>
+<section>
+<div class="document">
+<p>Raised when a receiver try to read a message without registration on channel.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: Exception</p><ul><li>Exception<ul><li>BaseException</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Bus(self, /, *args, **kwargs)</h2>
+<section>
+<div class="document">
+<p>A dictionary of channels.</p>
+<p>This is a normal dictionary, where each channel is identified by a
+key. You define a channel by assigning an object to a key.</p>
+<p>When you try  to redefine a channel, assigning a  new object to an
+existing key, the Bus can  silently discard the new definition, if
+the new  definition match the  previous defined channel  (i.e., if
+they  result  equals in  pythonic  sense).   Or  it can  raises  a
+ChannelDefinitionConflict when  the two channels don't  match (for
+example,   if  you   try  to   redefine  a   SimpleChannel  as   a
+BroadcastChannel).</p>
+<p>This behaviour allows threads to  define the same channel multiple
+times (so they  can avoid to syncronize), but force  them to do it
+consistently.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: dict</p><ul><li>dict</li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__setitem__(self, channel_id, channel)</h3>
+<section>
+<div class="document">
+<p>Set self[key] to value.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>get_queues(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Channel(self, /, *args, **kwargs)</h2>
+<section>
+<div class="document">
+<p>Abstract class for defining a channel.</p>
+<p>You must subclass this class to define a type of channel. A subclass must define two methods:</p>
+<dl class="docutils">
+<dt>send_message</dt>
+<dd>Method used by a sender to  send a message in the channel.</dd>
+<dt>read_message</dt>
+<dd>Method used by a receiver to  receive a message.</dd>
+</dl>
+<p>A Channel  must have  an &quot;equality&quot; definition,  i.e. must  have a
+method __eq__(). The  default is to evaluate as  equal two objects
+if they are  instance of the exact same class,  so allowing Bus to
+consider equivalent  two definitions  of channel  if they  are two
+instance of the same class. A  subclass is not equal to the parent
+class.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: abc.ABC</p><ul><li>abc.ABC</li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__eq__(self, other)</h3>
+<section>
+<div class="document">
+<p>Return self==value.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>read_message(self, block=False, timeout=None)</h3>
+<section>
+<div class="document">
+<p>Method used by a receiver to  receive a message.</p>
+<p>If  the queue  is empty  and block=False  (the default),  this
+method returns None.  If block=True,  it waits until a message
+is available.</p>
+<p>It   returns  the   tuple   *args   passed  to   corresponding
+send_message.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>send_message(self, *args)</h3>
+<section>
+<div class="document">
+<p>Method used by a sender to  send a message in the channel.</p>
+<p>The message is the tuple passed as *args.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>NullChannel(self, /, *args, **kwargs)</h2>
+<section>
+<div class="document">
+<p>Abstract class for defining a channel.</p>
+<p>You must subclass this class to define a type of channel. A subclass must define two methods:</p>
+<dl class="docutils">
+<dt>send_message</dt>
+<dd>Method used by a sender to  send a message in the channel.</dd>
+<dt>read_message</dt>
+<dd>Method used by a receiver to  receive a message.</dd>
+</dl>
+<p>A Channel  must have  an &quot;equality&quot; definition,  i.e. must  have a
+method __eq__(). The  default is to evaluate as  equal two objects
+if they are  instance of the exact same class,  so allowing Bus to
+consider equivalent  two definitions  of channel  if they  are two
+instance of the same class. A  subclass is not equal to the parent
+class.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.channels.Channel</p><ul><li>microdaemon.channels.Channel<ul><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__eq__(self, other)</h3>
+<section>
+<div class="document">
+<p>Return self==value.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>read_message(self, block=False, timeout=None)</h3>
+<section>
+<div class="document">
+<p>Method used by a receiver to  receive a message.</p>
+<p>If  the queue  is empty  and block=False  (the default),  this
+method returns None.  If block=True,  it waits until a message
+is available.</p>
+<p>It   returns  the   tuple   *args   passed  to   corresponding
+send_message.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>send_message(self, *args)</h3>
+<section>
+<div class="document">
+<p>Method used by a sender to  send a message in the channel.</p>
+<p>The message is the tuple passed as *args.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>CounterChannel(self)</h2>
+<section>
+<div class="document">
+<p>Abstract class for defining a channel.</p>
+<p>You must subclass this class to define a type of channel. A subclass must define two methods:</p>
+<dl class="docutils">
+<dt>send_message</dt>
+<dd>Method used by a sender to  send a message in the channel.</dd>
+<dt>read_message</dt>
+<dd>Method used by a receiver to  receive a message.</dd>
+</dl>
+<p>A Channel  must have  an &quot;equality&quot; definition,  i.e. must  have a
+method __eq__(). The  default is to evaluate as  equal two objects
+if they are  instance of the exact same class,  so allowing Bus to
+consider equivalent  two definitions  of channel  if they  are two
+instance of the same class. A  subclass is not equal to the parent
+class.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.channels.Channel</p><ul><li>microdaemon.channels.Channel<ul><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__eq__(self, other)</h3>
+<section>
+<div class="document">
+<p>Return self==value.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>read_message(self, block=False, timeout=None)</h3>
+<section>
+<div class="document">
+<p>Method used by a receiver to  receive a message.</p>
+<p>If  the queue  is empty  and block=False  (the default),  this
+method returns None.  If block=True,  it waits until a message
+is available.</p>
+<p>It   returns  the   tuple   *args   passed  to   corresponding
+send_message.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>send_message(self, *args)</h3>
+<section>
+<div class="document">
+<p>Method used by a sender to  send a message in the channel.</p>
+<p>The message is the tuple passed as *args.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>LoggerChannel(self)</h2>
+<section>
+<div class="document">
+<p>Abstract class for defining a channel.</p>
+<p>You must subclass this class to define a type of channel. A subclass must define two methods:</p>
+<dl class="docutils">
+<dt>send_message</dt>
+<dd>Method used by a sender to  send a message in the channel.</dd>
+<dt>read_message</dt>
+<dd>Method used by a receiver to  receive a message.</dd>
+</dl>
+<p>A Channel  must have  an &quot;equality&quot; definition,  i.e. must  have a
+method __eq__(). The  default is to evaluate as  equal two objects
+if they are  instance of the exact same class,  so allowing Bus to
+consider equivalent  two definitions  of channel  if they  are two
+instance of the same class. A  subclass is not equal to the parent
+class.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.channels.Channel</p><ul><li>microdaemon.channels.Channel<ul><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__eq__(self, other)</h3>
+<section>
+<div class="document">
+<p>Return self==value.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>read_message(self, block=False, timeout=None)</h3>
+<section>
+<div class="document">
+<p>Method used by a receiver to  receive a message.</p>
+<p>If  the queue  is empty  and block=False  (the default),  this
+method returns None.  If block=True,  it waits until a message
+is available.</p>
+<p>It   returns  the   tuple   *args   passed  to   corresponding
+send_message.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>send_message(self, *args)</h3>
+<section>
+<div class="document">
+<p>Method used by a sender to  send a message in the channel.</p>
+<p>The message is the tuple passed as *args.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>BrowserChannel(self, namespace=None)</h2>
+<section>
+<div class="document">
+<p>Abstract class for defining a channel.</p>
+<p>You must subclass this class to define a type of channel. A subclass must define two methods:</p>
+<dl class="docutils">
+<dt>send_message</dt>
+<dd>Method used by a sender to  send a message in the channel.</dd>
+<dt>read_message</dt>
+<dd>Method used by a receiver to  receive a message.</dd>
+</dl>
+<p>A Channel  must have  an &quot;equality&quot; definition,  i.e. must  have a
+method __eq__(). The  default is to evaluate as  equal two objects
+if they are  instance of the exact same class,  so allowing Bus to
+consider equivalent  two definitions  of channel  if they  are two
+instance of the same class. A  subclass is not equal to the parent
+class.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.channels.Channel</p><ul><li>microdaemon.channels.Channel<ul><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__eq__(self, other)</h3>
+<section>
+<div class="document">
+<p>Return self==value.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>read_message(self, block=False, timeout=None)</h3>
+<section>
+<div class="document">
+<p>Method used by a receiver to  receive a message.</p>
+<p>If  the queue  is empty  and block=False  (the default),  this
+method returns None.  If block=True,  it waits until a message
+is available.</p>
+<p>It   returns  the   tuple   *args   passed  to   corresponding
+send_message.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>send_message(self, *args)</h3>
+<section>
+<div class="document">
+<p>Method used by a sender to  send a message in the channel.</p>
+<p>The message is the tuple passed as *args.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>SimpleChannel(self)</h2>
+<section>
+<div class="document">
+<p>A channel with one receiver.</p>
+<p>This channel  has just one  queue. The method send_message  puts a
+message in the queue, and  the method read_message reads a message
+from the queue.</p>
+<p>There is no enforcement on the  number of threads reading from the
+queue, so it is to the programmer  to assure than no more than one
+thread read from a SimpleChannel (or to accept than a thread could
+lost some messages).</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.channels.Channel</p><ul><li>microdaemon.channels.Channel<ul><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__eq__(self, other)</h3>
+<section>
+<div class="document">
+<p>Return self==value.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>read_message(self, block=False, timeout=None)</h3>
+<section>
+<div class="document">
+<p>Method used by a receiver to  receive a message.</p>
+<p>If  the queue  is empty  and block=False  (the default),  this
+method returns None.  If block=True,  it waits until a message
+is available.</p>
+<p>It   returns  the   tuple   *args   passed  to   corresponding
+send_message.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>send_message(self, *args)</h3>
+<section>
+<div class="document">
+<p>Method used by a sender to  send a message in the channel.</p>
+<p>The message is the tuple passed as *args.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>LastOnlyChannel(self)</h2>
+<section>
+<div class="document">
+<p>A channel with one receiver forgetting all messages except last.</p>
+<p>This channel  has just one  queue. The method send_message  puts a
+message in the queue, and  the method read_message reads a message
+from the queue.  When a message is read, the  queue is emptied and
+only last message is returned to user.</p>
+<p>This channel  is useful  to record  status change  requests, where
+only last is significant.</p>
+<p>There is no enforcement on the  number of threads reading from the
+queue, so it is to the programmer  to assure than no more than one
+thread read from a SimpleChannel (or to accept than a thread could
+lost some messages).</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.channels.SimpleChannel</p><ul><li>microdaemon.channels.SimpleChannel<ul><li>microdaemon.channels.Channel<ul><li>abc.ABC</li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__eq__(self, other)</h3>
+<section>
+<div class="document">
+<p>Return self==value.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>read_message(self, block=False, timeout=None)</h3>
+<section>
+<div class="document">
+<p>Method used by a receiver to  receive a message.</p>
+<p>If  the queue  is empty  and block=False  (the default),  this
+method returns None.  If block=True,  it waits until a message
+is available.</p>
+<p>It   returns  the   tuple   *args   passed  to   corresponding
+send_message.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>send_message(self, *args)</h3>
+<section>
+<div class="document">
+<p>Method used by a sender to  send a message in the channel.</p>
+<p>The message is the tuple passed as *args.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>SerializerChannel(self)</h2>
+<section>
+<div class="document">
+<p>A channel with one receiver and able to serialize objects.</p>
+<p>This channel  has just one  queue. The method send_message  puts a
+message  in  the queue,  and  save  it  in  a storage  area  under
+STORAGE_SERIALIZER_CHANNELS/queue_name/.</p>
+<p>There is no enforcement on the  number of threads reading from the
+queue, so it is to the programmer  to assure than no more than one
+thread read from  a SerializerChannel (or to accept  than a thread
+could lost some messages).</p>
+<p>The  method  read_message  return  the  message  from  the  queue,
+prefixed  with  a message  id  assigned  by  the channel  (if  the
+original  message is  ('a','b','c')  the returned  object will  be
+(msg_id,'a','b','c') ).</p>
+<p>Users of SerializerChannel must commit  or rollback the read after
+message  elaboration. With  commit_read(),  the serialized  object
+will  be  deleted.  With  rollback_read(),  the  message  will  be
+requeued. The original order of arriving is preserved.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.channels.SimpleChannel</p><ul><li>microdaemon.channels.SimpleChannel<ul><li>microdaemon.channels.Channel<ul><li>abc.ABC</li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__eq__(self, other)</h3>
+<section>
+<div class="document">
+<p>Return self==value.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__setattr__(self, attr, value)</h3>
+<section>
+<div class="document">
+<p>Implement setattr(self, name, value).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_message_fpath(self, msg_id)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_serialize(self, msg_id, *args)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_unserialize(self, fname)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>commit_read(self, msg_id, *args)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>read_message(self, block=False, timeout=None)</h3>
+<section>
+<div class="document">
+<p>Method used by a receiver to  receive a message.</p>
+<p>If  the queue  is empty  and block=False  (the default),  this
+method returns None.  If block=True,  it waits until a message
+is available.</p>
+<p>It   returns  the   tuple   *args   passed  to   corresponding
+send_message.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>rollback_read(self, msg_id, *args)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>send_message(self, *args)</h3>
+<section>
+<div class="document">
+<p>Method used by a sender to  send a message in the channel.</p>
+<p>The message is the tuple passed as *args.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>CleanSerializerChannel(self)</h2>
+<section>
+<div class="document">
+<p>A channel with one receiver and able to serialize objects.</p>
+<p>This channel  has just one  queue. The method send_message  puts a
+message  in  the queue,  and  save  it  in  a storage  area  under
+STORAGE_SERIALIZER_CHANNELS/queue_name/.</p>
+<p>There is no enforcement on the  number of threads reading from the
+queue, so it is to the programmer  to assure than no more than one
+thread read from  a SerializerChannel (or to accept  than a thread
+could lost some messages).</p>
+<p>The  method  read_message  return  the  message  from  the  queue,
+prefixed  with  a message  id  assigned  by  the channel  (if  the
+original  message is  ('a','b','c')  the returned  object will  be
+(msg_id,'a','b','c') ).</p>
+<p>Users of SerializerChannel must commit  or rollback the read after
+message  elaboration. With  commit_read(),  the serialized  object
+will  be  deleted.  With  rollback_read(),  the  message  will  be
+requeued. The original order of arriving is preserved.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.channels.SerializerChannel</p><ul><li>microdaemon.channels.SerializerChannel<ul><li>microdaemon.channels.SimpleChannel<ul><li>microdaemon.channels.Channel<ul><li>abc.ABC</li></ul></li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__eq__(self, other)</h3>
+<section>
+<div class="document">
+<p>Return self==value.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__setattr__(self, attr, value)</h3>
+<section>
+<div class="document">
+<p>Implement setattr(self, name, value).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_message_fpath(self, msg_id)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_serialize(self, msg_id, *args)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_unserialize(self, fname)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>commit_read(self, msg_id, *args)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>read_message(self, block=False, timeout=None)</h3>
+<section>
+<div class="document">
+<p>Method used by a receiver to  receive a message.</p>
+<p>If  the queue  is empty  and block=False  (the default),  this
+method returns None.  If block=True,  it waits until a message
+is available.</p>
+<p>It   returns  the   tuple   *args   passed  to   corresponding
+send_message.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>rollback_read(self, msg_id, *args)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>send_message(self, *args)</h3>
+<section>
+<div class="document">
+<p>Method used by a sender to  send a message in the channel.</p>
+<p>The message is the tuple passed as *args.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>BroadcastChannel(self)</h2>
+<section>
+<div class="document">
+<p>A channel with multiple receivers.</p>
+<p>This channel has  a queue for each receiver. Each  receiver has an
+identifier  and  must  be registered  with  add_receiver()  before
+reading  from the  channel. It  must supply  the receiver  id when
+reading from the channel.</p>
+<p>All messages will be sent to all receivers.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.channels.Channel</p><ul><li>microdaemon.channels.Channel<ul><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__eq__(self, other)</h3>
+<section>
+<div class="document">
+<p>Return self==value.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>add_receiver(self, receiver_id)</h3>
+<section>
+<div class="document">
+<p>Register the receiver identified by receiver_id to the channel.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>read_message(self, receiver_id, block=False, timeout=None)</h3>
+<section>
+<div class="document">
+<p>This method overrides the default behaviour, with a new parameter:</p>
+<dl class="docutils">
+<dt>receiver_id</dt>
+<dd>The idenitifier of the receiver, as per add_receiver()</dd>
+</dl>
+<p>Return value is the same as other channels.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>reset(self)</h3>
+<section>
+<div class="document">
+<p>Deregister all receivers.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>send_message(self, *args)</h3>
+<section>
+<div class="document">
+<p>Method used by a sender to  send a message in the channel.</p>
+<p>The message is the tuple passed as *args.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>RouterChannel(self)</h2>
+<section>
+<div class="document">
+<p>A channel with multiple receivers, where each receiver can read only a subset of messages.</p>
+<p>This channel has  a queue for each receiver. Each  receiver has an
+identifier  and  must be  registered  with  add_receiver(), as  in
+BroadcastChannel.  But  the receiver  must  supply  a function  to
+filter messages that they are interested in.</p>
+<p>Messages will only be sent to a receiver when the filter match the
+message.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.channels.BroadcastChannel</p><ul><li>microdaemon.channels.BroadcastChannel<ul><li>microdaemon.channels.Channel<ul><li>abc.ABC</li></ul></li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__eq__(self, other)</h3>
+<section>
+<div class="document">
+<p>Return self==value.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>add_receiver(self, receiver_id, check)</h3>
+<section>
+<div class="document">
+<p>This method overrides the behaviour of BroadcastChannel, with a new parameter:</p>
+<dl class="docutils">
+<dt>check</dt>
+<dd>A function with the signature f(*args), that returns True
+if the  receiver is interested  in the message,  and False
+otherwise.</dd>
 </dl>
 </div>
+</section>
+</section>
+<section>
+<h3 class='title'>read_message(self, receiver_id, block=False, timeout=None)</h3>
+<section>
+<div class="document">
+<p>This method overrides the default behaviour, with a new parameter:</p>
+<dl class="docutils">
+<dt>receiver_id</dt>
+<dd>The idenitifier of the receiver, as per add_receiver()</dd>
+</dl>
+<p>Return value is the same as other channels.</p>
 </div>
+</section>
+</section>
+<section>
+<h3 class='title'>reset(self)</h3>
+<section>
+<div class="document">
+<p>Deregister all receivers.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>send_message(self, *args)</h3>
+<section>
+<div class="document">
+<p>Method used by a sender to  send a message in the channel.</p>
+<p>The message is the tuple passed as *args.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+</section>

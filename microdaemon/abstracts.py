@@ -132,7 +132,6 @@ class ListDictCollection(collections.abc.MutableSequence,abc.ABC):
         self._objects.__delitem__(key)
         self._by_key.__delitem__(object_id)
 
-
 class ObjectDuplicateException(Exception): pass
 
 class ObjectCollection(ListDictCollection,abc.ABC):

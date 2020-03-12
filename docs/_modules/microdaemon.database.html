@@ -1,6 +1,439 @@
 ---
 name: microdaemon.database
 ---
-<h1>microdaemon.database</h1><div><div class="document">
+<h1 class='title'>microdaemon.database</h1>
+<section>
+<div class="document">
 </div>
+</section>
+<section>
+<h1>Classes</h1>
+<section>
+<h2 class='title'>Media(self, obj_id, fpath)</h2>
+<section>
+<div class="document">
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
 </div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: abc.ABC</p><ul><li>abc.ABC</li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_default_meta(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_mk_thumbnail(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_setup_data(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_setup_meta(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Video(self, obj_id, fpath)</h2>
+<section>
+<div class="document">
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.database.Media</p><ul><li>microdaemon.database.Media<ul><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_default_meta(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_mk_thumbnail(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_setup_data(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_setup_meta(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Music(self, obj_id, fpath)</h2>
+<section>
+<div class="document">
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.database.Media</p><ul><li>microdaemon.database.Media<ul><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_default_meta(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_mk_thumbnail(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_setup_data(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_setup_meta(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>Picture(self, obj_id, fpath)</h2>
+<section>
+<div class="document">
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.database.Media</p><ul><li>microdaemon.database.Media<ul><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>_default_meta(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_exif_data(self, label, tag_val)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_exif_label(self, tag_label)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_mk_thumbnail(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_setup_data(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_setup_meta(self)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>MediaCollection(self, name, add_fields=[])</h2>
+<section>
+<div class="document">
+<p>Object list and dictionary.</p>
+<p>You can  append or insert  an object as into  a list, but  you can
+read it or by index (like a list) or by object object_id (like a dict).</p>
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: microdaemon.abstracts.ListDictCollection</p><ul><li>microdaemon.abstracts.ListDictCollection<ul><li>collections.abc.MutableSequence<ul><li>collections.abc.Sequence<ul><li>collections.abc.Reversible<ul><li>collections.abc.Iterable</li></ul></li><li>collections.abc.Collection<ul><li>collections.abc.Sized</li><li>collections.abc.Iterable</li><li>collections.abc.Container</li></ul></li></ul></li></ul></li><li>abc.ABC</li></ul></li></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__contains__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__delitem__(self, key)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__getitem__(self, key)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__iadd__(self, values)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__iter__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__len__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__reversed__(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>__setitem__(self, key, obj)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>_insert(self, key, obj)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>append(self, value)</h3>
+<section>
+<div class="document">
+<p>S.append(value) -- append value to the end of the sequence</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>clear(self)</h3>
+<section>
+<div class="document">
+<p>S.clear() -&gt; None -- remove all items from S</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>count(self, value)</h3>
+<section>
+<div class="document">
+<p>S.count(value) -&gt; integer -- return number of occurrences of value</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>extend(self, values)</h3>
+<section>
+<div class="document">
+<p>S.extend(iterable) -- extend sequence by appending elements from the iterable</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>index(self, value, start=0, stop=None)</h3>
+<section>
+<div class="document">
+<p>S.index(value, [start, [stop]]) -&gt; integer -- return first index of value.
+Raises ValueError if the value is not present.</p>
+<p>Supporting start and stop arguments is optional, but
+recommended.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>insert(self, key, obj)</h3>
+<section>
+<div class="document">
+<p>S.insert(index, value) -- insert value before index</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>pop(self, index=-1)</h3>
+<section>
+<div class="document">
+<p>S.pop([index]) -&gt; item -- remove and return item at index (default last).
+Raise IndexError if list is empty or index is out of range.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>remove(self, value)</h3>
+<section>
+<div class="document">
+<p>S.remove(value) -- remove first occurrence of value.
+Raise ValueError if the value is not present.</p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>reverse(self)</h3>
+<section>
+<div class="document">
+<p>S.reverse() -- reverse <em>IN PLACE</em></p>
+</div>
+</section>
+</section>
+<section>
+<h3 class='title'>sort(self, *args, **kwargs)</h3>
+<section>
+<div class="document">
+</div>
+</section>
+</section>
+</section>
+<section>
+<h2>Classes</h2>
+<section>
+<h3 class='title'>OneTimeDict(self, /, *args, **kwargs)</h3>
+<section>
+<div class="document">
+<p>dict() -&gt; new empty dictionary
+dict(mapping) -&gt; new dictionary initialized from a mapping object's</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 3)</p>
+Unexpected indentation.</div>
+<blockquote>
+(key, value) pairs</blockquote>
+<div class="system-message">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 4)</p>
+Block quote ends without a blank line; unexpected unindent.</div>
+<dl class="docutils">
+<dt>dict(iterable) -&gt; new dictionary initialized as if via:</dt>
+<dd><p class="first">d = {}
+for k, v in iterable:</p>
+<div class="system-message">
+<p class="system-message-title">System Message: ERROR/3 (<tt class="docutils">&lt;string&gt;</tt>, line 7)</p>
+Unexpected indentation.</div>
+<blockquote class="last">
+d[k] = v</blockquote>
+</dd>
+<dt>dict(<a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs) -&gt; new dictionary initialized with the name=value pairs</dt>
+<dd><div class="first system-message" id="id1">
+<p class="system-message-title">System Message: WARNING/2 (<tt class="docutils">&lt;string&gt;</tt>, line 8); <em><a href="#id2">backlink</a></em></p>
+Inline strong start-string without end-string.</div>
+<p class="last">in the keyword argument list.  For example:  dict(one=1, two=2)</p>
+</dd>
+</dl>
+</div>
+
+</section>
+<section>
+<h3>Parents</h3>
+<p>Bases: dict</p><ul><li>dict</li></ul></section>
+<section>
+<h3>Methods</h3>
+<section>
+<h4 class='title'>__setitem__(self, key, obj)</h4>
+<section>
+<div class="document">
+<p>Set self[key] to value.</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+</section>
+</section>
+<section>
+<h2 class='title'>IsambardDatabase(self, configuration_file)</h2>
+<section>
+<div class="document">
+</div>
+
+</section>
+<section>
+<h2>Parents</h2>
+<p>Bases: object</p><ul></ul></section>
+<section>
+<h2>Methods</h2>
+<section>
+<h3 class='title'>__str__(self)</h3>
+<section>
+<div class="document">
+<p>Return str(self).</p>
+</div>
+</section>
+</section>
+</section>
+</section>
+</section>
